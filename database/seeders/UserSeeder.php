@@ -4,8 +4,12 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+
 use App\Models\User;
+use App\Models\Status;
+
 use Spatie\Permission\Models\Role;
+
 
 class UserSeeder extends Seeder
 {
@@ -20,27 +24,35 @@ class UserSeeder extends Seeder
         
         */
         // Crear roles
-        $superAdminRole = Role::firstOrCreate(['name' => 'super admin']);
+        $SuperAdminRole = Role::firstWhere('name', 'super admin');
+
+        // Obtenemos el estado activo
+        $statusActive = Status::firstWhere('name', 'Activo');
 
         // Crear usuario Super Admin Francisco
-        $superAdmin = User::firstOrCreate(
+        $AdminFrank = User::firstOrCreate(
             ['email' => 'jfcruz@outlook.com'],
             [
-                'name' => 'Super Admin',
+                'name' => 'Francisco',
+                'last_name' => 'Ayapantecalth',
                 'password' => Hash::make('P4$$wOrd-2025SA'),
+                'status_id' => $statusActive->id,
             ]
         );
+
         // crear usuario Super Admin Jesus Armando Castro Tun
-        $superAdmin3 = User::firstOrCreate(
+        $AdminJesus = User::firstOrCreate(
             ['email' => 'jesus.castro@meracorporation.com'],
             [
-                'name' => 'Super Admin',
+                'name' => 'Jesús Armando',
+                'last_name' => 'Castro Tun',
                 'password' => Hash::make('P4$$wOrd-2025SA'),
+                'status_id' => $statusActive->id,
             ]
         );
-        ;
+
         // Asignar rol de super admin a los usuarios creados
-        $superAdmin->assignRole($superAdminRole);
-        $superAdmin3->assignRole($superAdminRole);
+        $AdminFrank->assignRole($SuperAdminRole);
+        $AdminJesus->assignRole($SuperAdminRole);
     }
 }

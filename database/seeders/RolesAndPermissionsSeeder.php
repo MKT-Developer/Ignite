@@ -5,36 +5,49 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\PermissionRegistrar;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Seed the application's roles and permissions.
+     */
+    public function run(): void
     {
-        // Limpiar cache de roles y permisos
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        // Limpiar caché de roles y permisos
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
 
-        // Crear permisos
+        // Permisos base del módulo de usuarios
         $permissions = [
-            'Editor'
+            'users.create',
+            'users.read',
+            'users.update',
+            'users.delete',
         ];
 
         foreach ($permissions as $permission) {
-            Permission::firstOrCreate(['name' => $permission]);
+            Permission::firstOrCreate([
+                'name' => $permission,
+                'guard_name' => 'web',
+            ]);
         }
 
-        // Crear roles y asignar permisos
-        $roles = [
-            'super admin' => Permission::all(),
-            'Editor' => ['Editor'],
-        ];
+        // Roles base
+        $superAdmin = Role::firstOrCreate([
+            'name' => 'super admin',
+            'guard_name' => 'web',
+        ]);
 
-        foreach ($roles as $roleName => $perms) {
-            $role = Role::firstOrCreate(['name' => $roleName]);
-            if (is_array($perms)) {
-                $role->syncPermissions($perms);
-            } else {
-                $role->syncPermissions($perms);
-            }
-        }
+        $user = Role::firstOrCreate([
+            'name' => 'user',
+            'guard_name' => 'web',
+        ]);
+
+        // El Super Admin tiene todos los permisos
+        $superAdmin->syncPermissions(Permission::all());
+
+        // El rol User inicia sin permisos.
+        // Conforme se creen nuevos módulos se le podrán asignar.
+        $user->syncPermissions([]);
     }
 }

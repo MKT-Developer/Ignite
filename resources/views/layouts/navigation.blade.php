@@ -14,12 +14,7 @@
                                 <span class="pcoded-mtext">Historial de Actividad</span>
                             </a>
                         </li> -->
-                        <!-- <li class="{{ request()->routeIs('lounges.*') ? 'active' : '' }}">
-                            <a href="{{ route('lounges.index') }}" class="waves-effect waves-dark">
-                                <span class="pcoded-mtext">Salas Lounge</span>
-                            </a>
-                        </li> -->
-
+                        
                         <li class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
                             <a href="{{ route('dashboard') }}" class="waves-effect waves-dark">
                                 <span class="pcoded-micon"><i class="fas fa-tachometer-alt"></i></span>
@@ -47,22 +42,6 @@
                                     <i class="fas fa-id-badge"></i>
                                 </span>
                                 <span class="pcoded-mtext">Roles</span>
-                            </a>
-                        </li>
-
-                        <li class="{{ request()->routeIs('categories.*') ? 'active' : '' }}">
-                            <a href="{{ route('categories.index') }}" class="waves-effect waves-dark">
-                                <span class="pcoded-micon"><i class="fas fa-tags"></i></span>
-                                <span class="pcoded-mtext">Categorías</span>
-                            </a>
-                        </li>
-
-                        <li class="{{ request()->routeIs('courses.*') ? 'active' : '' }}">
-                            <a href="{{ route('courses.index') }}" class="waves-effect waves-dark">
-                                <span class="pcoded-micon">
-                                    <i class="fas fa-book"></i>
-                                </span>
-                                <span class="pcoded-mtext">Cursos</span>
                             </a>
                         </li>
 

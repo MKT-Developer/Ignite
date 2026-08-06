@@ -11,12 +11,15 @@ use Illuminate\View\View;
 class EmailVerificationPromptController extends Controller
 {
     /**
-     * Display the email verification prompt.
+     * Pantalla de verificación de correo.
+     *
+     * Este flujo permanece disponible para reutilizar el módulo de usuarios
+     * en proyectos donde config('users.email_verification') sea true.
      */
     public function __invoke(Request $request): RedirectResponse|View
     {
         return $request->user()->hasVerifiedEmail()
-                    ? redirect()->intended(RouteServiceProvider::HOME)
-                    : view('auth.verify-email');
+            ? redirect()->intended(RouteServiceProvider::HOME)
+            : view('auth.verify-email');
     }
 }

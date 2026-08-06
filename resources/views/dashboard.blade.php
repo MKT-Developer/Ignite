@@ -26,23 +26,6 @@
 
 {{-- MÉTRICAS --}}
 <div class="row">
-    <div class="col-xl-3 col-md-6">
-        <div class="mera-dashboard-card">
-            <div class="mera-dashboard-icon mera-green">
-                <i class="fas fa-book"></i>
-            </div>
-
-            <div>
-                <span>
-                    Cursos
-                </span>
-
-                <h3>
-                    {{ $coursesCount ?? 0 }}
-                </h3>
-            </div>
-        </div>
-    </div>
 
     <div class="col-xl-3 col-md-6">
         <div class="mera-dashboard-card">
@@ -57,24 +40,6 @@
 
                 <h3>
                     {{ $usersCount ?? 0 }}
-                </h3>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-3 col-md-6">
-        <div class="mera-dashboard-card">
-            <div class="mera-dashboard-icon mera-aqua">
-                <i class="fas fa-tags"></i>
-            </div>
-
-            <div>
-                <span>
-                    Categorías
-                </span>
-
-                <h3>
-                    {{ $categoriesCount ?? 0 }}
                 </h3>
             </div>
         </div>
@@ -107,28 +72,6 @@
         </h5>
 
         <div class="row">
-            <div class="col-md-4">
-                <a href="{{ route('courses.create') }}"
-                    class="mera-shortcut">
-
-                    <i class="fas fa-plus"></i>
-
-                    <span>
-                        Nuevo curso
-                    </span>
-                </a>
-            </div>
-
-            <div class="col-md-4">
-                <a href="{{ route('categories.create') }}" class="mera-shortcut">
-
-                    <i class="feather icon-plus-circle"></i>
-
-                    <span>
-                        Nueva categoría
-                    </span>
-                </a>
-            </div>
 
             <div class="col-md-4">
                 <a href="{{ route('users.create') }}"
@@ -141,41 +84,21 @@
                     </span>
                 </a>
             </div>
-        </div>
-    </div>
-</div>
 
-{{-- CURSOS RECIENTES --}}
-<div class="card mera-dashboard-section">
-    <div class="card-body">
-        <h5 class="mera-section-title">
-            Cursos recientes
-        </h5>
+            <div class="col-md-4">
+                <a href="{{ route('roles.create') }}"
+                    class="mera-shortcut">
 
-        @forelse($recentCourses as $course)
-        <div class="mera-recent-item">
-            <div>
-                <strong>
-                    {{ $course->name }}
-                </strong>
+                    <i class="fas fa-id-badge"></i>
 
-                <small>
-
-                    {{ $course->category->name ?? 'Sin categoría' }}
-
-                </small>
+                    <span>
+                        Nuevo rol
+                    </span>
+                </a>
             </div>
-
-            <a href="{{ route('courses.edit',$course) }}" class="mera-view-btn">
-                Ver
-            </a>
         </div>
-
-        @empty
-        <p class="text-muted">
-            No hay cursos registrados todavía.
-        </p>
-        @endforelse
     </div>
 </div>
+
+
 @endsection

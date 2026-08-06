@@ -2,23 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Course;
 use App\Models\User;
+use App\Models\Status;
 use Spatie\Permission\Models\Role;
-use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         return view('dashboard', [
-            'usersCount'      => User::count(),
-            'coursesCount'    => Course::count(),
-            'categoriesCount' => Category::count(),
-            'recentCourses' => Course::latest()->take(5)->get(),
-            // 'recentActivity' => ActivityLog::latest()->take(10)->get(),
-            'rolesCount'      => Role::count(),
+
+            'currentUser' => auth()->user(),
+
+            'usersCount' => User::count(),
+
+            'rolesCount' => Role::count(),
+
+            'permissionsCount' => Permission::count(),
+
+            'activeUsersCount' => User::whereHas('status', function ($query) {
+                $query->where('name', config('users.default_status'));
+            })->count(),
+
+            'statusesCount' => Status::count(),
+
         ]);
     }
 }

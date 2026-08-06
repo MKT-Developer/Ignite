@@ -10,7 +10,10 @@ use Illuminate\Http\Request;
 class EmailVerificationNotificationController extends Controller
 {
     /**
-     * Send a new email verification notification.
+     * Reenvía el correo de verificación.
+     *
+     * Este controlador permanece disponible para proyectos donde
+     * config('users.email_verification') sea true.
      */
     public function store(Request $request): RedirectResponse
     {

@@ -11,6 +11,7 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
     /**
      * Display the user's profile form.
      */
@@ -26,35 +27,54 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $user->fill(
+            $request->validated()
+        );
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $user->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit')
+            ->with(
+                'status',
+                'profile-updated'
+            );
     }
 
     /**
-     * Delete the user's account.
+     * Delete user's account.
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
+        $request->validateWithBag(
+            'userDeletion',
+            [
+                'password' => [
+                    'required',
+                    'current_password'
+                ],
+            ]
+        );
 
         $user = $request->user();
 
+        if ($user->hasRole('super admin')) {
+            return Redirect::route('profile.edit')
+                ->with(
+                    'error',
+                    'Un Super Admin no puede eliminar su propia cuenta.'
+                );
+        }
+
         Auth::logout();
-
         $user->delete();
-
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        return Redirect::route('login');
     }
 }
