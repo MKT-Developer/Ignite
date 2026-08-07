@@ -18,7 +18,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
             <div>
                 <a href="/">
-                    <img src="{{ asset('images/logo_university.svg') }}" alt="Logo" class="h-20">
+                    <img src="{{ asset('images/../images/portal/meraignite-horizontal.png') }}" alt="Logo" class="h-20">
                 </a>
             </div>
 

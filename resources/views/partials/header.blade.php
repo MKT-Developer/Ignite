@@ -16,7 +16,7 @@ $isPortalUser = auth()->check() && auth()->user()->hasRole('user');
             @endif
 
             <a class="text-left" href="{{ $isPortalUser ? route('portal.index') : route('dashboard') }}">
-                <img class="img-fluid h-10" src="{{ asset('images/logo_university.svg') }}" alt="Theme-Logo">
+                <img class="img-fluid h-10" src="{{ asset('images/../images/portal/meraignite-horizontal.png') }}" alt="Theme-Logo">
             </a>
 
             <div class="mobile-user">
