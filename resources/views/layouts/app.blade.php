@@ -40,7 +40,14 @@
     @stack('styles')
 </head>
 
-<body class="font-sans antialiased">
+@php
+$showSidebar = auth()->check() && !auth()->user()->hasRole('user');
+$isPortal = auth()->check() && auth()->user()->hasRole('user');
+@endphp
+
+<!-- <body class="font-sans antialiased {{ auth()->check() && auth()->user()->hasRole('user') ? 'portal-user' : '' }}"> -->
+
+<body class="{{ $isPortal ? 'portal-user' : '' }}">
     <div id="anti-screenshot-overlay"></div>
     <!-- [ Pre-loader ] start -->
     <div class="loader-bg">
@@ -53,12 +60,18 @@
             @include('partials.header')
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
+                    
+                    {{-- @if($showSidebar) --}}
+                    @if(!$isPortal)
                     <!-- [ navigation menu ] start -->
                     @include('layouts.navigation')
                     <!-- [ navigation menu ] end -->
-                    <div class="pcoded-content px-4 py-4">
+                    @endif
+
+                    <div class="pcoded-content {{ !$showSidebar ? 'w-100' : '' }}">
                         @yield('content')
                     </div>
+
                 </div>
             </div>
         </div>

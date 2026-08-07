@@ -2,35 +2,125 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\User;
 use App\Models\Status;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\Hash;
+
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::with([
+        $query = User::with([
             'roles',
             'status'
-        ])->get();
+        ]);
 
-        return view('users.index', compact('users'));
+        /*
+        |--------------------------------------------------------------------------
+        | Búsqueda general
+        |--------------------------------------------------------------------------
+        */
+        if ($request->filled('search')) {
+
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('employee_number', 'like', "%{$search}%");
+            });
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Filtro por país
+        |--------------------------------------------------------------------------
+        */
+        if ($request->filled('country')) {
+
+            $query->where(
+                'country',
+                $request->country
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Filtro por estado
+        |--------------------------------------------------------------------------
+        */
+        if ($request->filled('status_id')) {
+            $query->where(
+                'status_id',
+                $request->status_id
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Filtro por rol
+        |--------------------------------------------------------------------------
+        */
+        if ($request->filled('role')) {
+
+            $query->whereHas(
+                'roles',
+                function ($q) use ($request) {
+
+                    $q->where(
+                        'name',
+                        $request->role
+                    );
+                }
+            );
+        }
+
+        $users = $query
+            ->orderBy('name')
+            ->paginate(10)
+            ->withQueryString();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Datos para filtros
+        |--------------------------------------------------------------------------
+        */
+        $countries = User::whereNotNull('country')
+            ->distinct()
+            ->orderBy('country')
+            ->pluck('country');
+
+        $statuses = Status::all();
+
+        $roles = Role::orderBy('name')
+            ->get();
+
+        return view('users.index', compact(
+            'users',
+            'countries',
+            'statuses',
+            'roles'
+        ));
     }
-
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        $roles = Role::all();
+        // $roles = Role::all();
+        $roles = Role::whereNot('name', 'super admin')->get();
         $statuses = Status::all();
 
         return view('users.create', compact(
@@ -46,6 +136,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'employee_number' => [
+                'nullable',
+                'string',
+                'unique:users'
+            ],
+
             'name' => [
                 'required',
                 'string',
@@ -72,6 +168,12 @@ class UserController extends Controller
                 'max:20'
             ],
 
+            'country' => [
+                'nullable',
+                'string',
+                'max:100'
+            ],
+
             'password' => [
                 'required',
                 'string',
@@ -90,14 +192,18 @@ class UserController extends Controller
             ],
         ]);
 
+        $user = null;
+
         DB::transaction(function () use ($request, &$user) {
 
             $user = User::create([
+                'employee_number' => $request->employee_number,
                 'name' => $request->name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'password' => Hash::make($request->password),
+                'country' => $request->country,
+                'password' => $request->password,
                 'status_id' => $request->status_id,
             ]);
 
@@ -126,7 +232,12 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $roles = Role::all();
+        // $roles = Role::whereNot('name', 'super admin')->get();
+        if ($user->hasRole('super admin')) {
+            $roles = Role::where('name', 'super admin')->get();
+        } else {
+            $roles = Role::whereNot('name', 'super admin')->get();
+        }
         $statuses = Status::all();
 
 
@@ -144,6 +255,11 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
+            'employee_number' => [
+                'nullable',
+                'string',
+                "unique:users,employee_number,{$id}"
+            ],
 
             'name' => [
                 'required',
@@ -169,6 +285,12 @@ class UserController extends Controller
                 'max:20'
             ],
 
+            'country' => [
+                'nullable',
+                'string',
+                'max:100'
+            ],
+
             'password' => [
                 'nullable',
                 'string',
@@ -191,22 +313,6 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
 
-
-        $user->update([
-            'name' => $request->name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'status_id' => $request->status_id,
-        ]);
-
-
-        if ($request->filled('password')) {
-            $user->update([
-                'password' => Hash::make($request->password)
-            ]);
-        }
-
         if (
             $user->hasRole('super admin') &&
             $request->role !== 'super admin'
@@ -215,6 +321,23 @@ class UserController extends Controller
                 'error',
                 'No puedes quitar el rol de Super Admin.'
             );
+        }
+
+        $user->update([
+            'employee_number' => $request->employee_number,
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'country' => $request->country,
+            'status_id' => $request->status_id,
+        ]);
+
+
+        if ($request->filled('password')) {
+            $user->update([
+                'password' => $request->password
+            ]);
         }
 
         $user->syncRoles($request->role);
@@ -233,12 +356,15 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if ($user->hasRole('super admin')) {
+        if (
+            $user->hasRole('super admin') &&
+            auth()->id() !== $user->id
+        ) {
             return redirect()
                 ->route('users.index')
                 ->with(
                     'error',
-                    'No se puede eliminar a un Super Admin.'
+                    'No puedes eliminar otro Super Admin.'
                 );
         }
 

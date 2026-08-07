@@ -40,7 +40,8 @@
                             type="text"
                             name="name"
                             class="form-control mera-input"
-                            value="{{ $role->name }}"
+                            value="{{ old('name', $role->name) }}"
+                            {{ $role->name === 'super admin' ? 'readonly' : '' }}
                             required>
 
                     </div>
@@ -70,7 +71,8 @@
                                 id="permission{{ $permission->id }}"
                                 name="permissions[]"
                                 value="{{ $permission->name }}"
-                                {{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }}>
+                                {{ in_array($permission->name, old('permissions', $role->permissions->pluck('name')->toArray())) ? 'checked' : '' }}
+                                {{ $role->name === 'super admin' ? 'disabled' : '' }}>
 
                             <label
                                 class="form-check-label"

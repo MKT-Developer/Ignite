@@ -19,10 +19,17 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // Permisos base del módulo de usuarios
         $permissions = [
+            // Usuarios
             'users.create',
             'users.read',
             'users.update',
             'users.delete',
+
+            // Roles
+            'roles.create',
+            'roles.read',
+            'roles.update',
+            'roles.delete',
         ];
 
         foreach ($permissions as $permission) {
@@ -38,6 +45,11 @@ class RolesAndPermissionsSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
+        $admin = Role::firstOrCreate([
+            'name' => 'admin',
+            'guard_name' => 'web',
+        ]);
+
         $user = Role::firstOrCreate([
             'name' => 'user',
             'guard_name' => 'web',
@@ -45,6 +57,18 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // El Super Admin tiene todos los permisos
         $superAdmin->syncPermissions(Permission::all());
+
+        $admin->syncPermissions([
+            'users.create',
+            'users.read',
+            'users.update',
+            'users.delete',
+
+            'roles.create',
+            'roles.read',
+            'roles.update',
+            'roles.delete',
+        ]);
 
         // El rol User inicia sin permisos.
         // Conforme se creen nuevos módulos se le podrán asignar.

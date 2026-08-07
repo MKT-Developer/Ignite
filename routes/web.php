@@ -29,23 +29,23 @@ Route::get('/', function () {
     ->name('home');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth'])
+    ->middleware([
+        'auth',
+        'role:super admin|admin'
+    ])
     ->name('dashboard');
 
 //Rutas protegidas por autenticación
 // Route::middleware('auth')->group(function () {
-
 Route::middleware('auth')->group(function () {
 
+    // SUPER ADMIN + ADMIN -> Admin Panel
     Route::middleware(['role:super admin|admin'])->group(function () {
-        // SUPER ADMIN + ADMIN -> Admin Panel
-        Route::middleware(['role:super admin|admin'])->group(function () {
-            Route::resource('users', UserController::class);
-            Route::resource('roles', RoleController::class);
-            Route::resource('permissions', PermissionController::class);
+        Route::resource('users', UserController::class);
+        Route::resource('roles', RoleController::class);
+        Route::resource('permissions', PermissionController::class);
 
-            Route::get('activity-logs', [ActivityLogController::class, 'index'])->name('activity.logs.index');
-        });
+        Route::get('activity-logs', [ActivityLogController::class, 'index'])->name('activity.logs.index');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])
@@ -56,6 +56,12 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
+
+    Route::get('/portal', function () {
+        return view('portal.index');
+    })
+        ->middleware('role:user')
+        ->name('portal.index');
 });
 
 require __DIR__ . '/auth.php';

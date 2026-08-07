@@ -1,17 +1,23 @@
+@php
+$isPortalUser = auth()->check() && auth()->user()->hasRole('user');
+@endphp
+
 <!-- [ Header ] start -->
 <nav class="navbar header-navbar pcoded-header">
     <div class="navbar-wrapper">
         <div class="navbar-logo">
 
+            @if(!$isPortalUser)
+
             <a class="mobile-menu" id="mobile-collapse" href="#!">
-                <!-- <i class="feather icon-menu icon-toggle-right"></i> -->
                 <i class="feather icon-menu"></i>
             </a>
 
-            <a class=" text-left " href="{{ url('/dashboard') }}">
-                <img class="img-fluid h-10" src="{{ asset('images/logo_university.svg') }}" alt="Theme-Logo" />
-            </a>
+            @endif
 
+            <a class="text-left" href="{{ $isPortalUser ? route('portal.index') : route('dashboard') }}">
+                <img class="img-fluid h-10" src="{{ asset('images/logo_university.svg') }}" alt="Theme-Logo">
+            </a>
 
             <div class="mobile-user">
                 <div class="dropdown-primary dropdown">

@@ -18,7 +18,6 @@ class RoleController extends Controller
         return view('roles.index', compact('roles'));
     }
 
-
     /**
      * Show form to create role.
      */
@@ -28,7 +27,6 @@ class RoleController extends Controller
 
         return view('roles.create', compact('permissions'));
     }
-
 
     /**
      * Store new role.
@@ -57,17 +55,14 @@ class RoleController extends Controller
             'guard_name' => 'web',
         ]);
 
-
         $role->syncPermissions(
             $request->permissions ?? []
         );
-
 
         return redirect()
             ->route('roles.index')
             ->with('success', 'Rol creado correctamente.');
     }
-
 
     /**
      * Show form to edit role.
@@ -81,7 +76,6 @@ class RoleController extends Controller
             'permissions'
         ));
     }
-
 
     /**
      * Update role.
@@ -104,7 +98,6 @@ class RoleController extends Controller
             ],
         ]);
 
-
         // Evitar modificar el rol principal
         if (
             $role->name === 'super admin' &&
@@ -118,31 +111,33 @@ class RoleController extends Controller
                 );
         }
 
-
         $role->update([
             'name' => $request->name,
         ]);
 
+        if ($role->name === 'super admin') {
 
-        $role->syncPermissions(
-            $request->permissions ?? []
-        );
+            $role->syncPermissions(
+                Permission::all()
+            );
+        } else {
 
+            $role->syncPermissions(
+                $request->permissions ?? []
+            );
+        }
 
         return redirect()
             ->route('roles.index')
             ->with('success', 'Rol actualizado correctamente.');
     }
 
-
     /**
      * Delete role.
      */
     public function destroy(Role $role)
     {
-
         if ($role->name === 'super admin') {
-
             return redirect()
                 ->route('roles.index')
                 ->with(
@@ -151,9 +146,7 @@ class RoleController extends Controller
                 );
         }
 
-
         $role->delete();
-
 
         return redirect()
             ->route('roles.index')

@@ -6,6 +6,7 @@
 
 <div class="card mera-form-card">
 
+
     <div class="card-header mera-form-header">
 
         <div class="mera-header-icon">
@@ -43,8 +44,28 @@
                             type="text"
                             name="name"
                             class="form-control mera-input"
-                            value="{{ $user->name }}"
+                            value="{{ old('name', $user->name) }}"
                             required>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="col-md-6">
+
+                    <div class="form-group mera-form-group">
+
+                        <label>
+                            Apellido(s)
+                        </label>
+
+                        <input
+                            type="text"
+                            name="last_name"
+                            class="form-control mera-input"
+                            value="{{ old('last_name', $user->last_name) }}">
 
                     </div>
 
@@ -64,8 +85,83 @@
                             type="email"
                             name="email"
                             class="form-control mera-input"
-                            value="{{ $user->email }}"
+                            value="{{ old('email', $user->email) }}"
                             required>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="col-md-6">
+
+                    <div class="form-group mera-form-group">
+
+                        <label>
+                            Teléfono
+                        </label>
+
+                        <input
+                            type="text"
+                            name="phone"
+                            class="form-control mera-input"
+                            value="{{ old('phone', $user->phone) }}">
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="col-md-6">
+
+                    <div class="form-group mera-form-group">
+
+                        <label>
+                            País
+                        </label>
+
+                        <input
+                            type="text"
+                            name="country"
+                            class="form-control mera-input"
+                            value="{{ old('country', $user->country) }}">
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="col-md-6">
+
+                    <div class="form-group mera-form-group">
+
+                        <label>
+                            Estado
+                        </label>
+
+                        <select
+                            name="status_id"
+                            class="form-control mera-input"
+                            required>
+
+
+                            @foreach ($statuses as $status)
+
+                            <option
+                                value="{{ $status->id }}"
+                                {{ $user->status_id == $status->id ? 'selected' : '' }}>
+
+                                {{ $status->name }}
+
+                            </option>
+
+                            @endforeach
+
+
+                        </select>
 
                     </div>
 
@@ -162,7 +258,7 @@
 
     </div>
 
-</div>
 
+</div>
 
 @endsection

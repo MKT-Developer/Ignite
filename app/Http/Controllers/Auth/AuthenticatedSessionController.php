@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
-
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -32,10 +31,10 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
 
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
-
-        if ($user->status?->name !== 'Activo') {
+        if (!$user->isActive()) {
 
             Auth::guard('web')->logout();
 
@@ -43,11 +42,14 @@ class AuthenticatedSessionController extends Controller
 
             $request->session()->regenerateToken();
 
-
             return redirect('/')
                 ->with('error', 'Tu usuario se encuentra inactivo.');
         }
 
+        if ($user->hasRole('user')) {
+
+            return redirect()->route('portal');
+        }
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
@@ -60,12 +62,9 @@ class AuthenticatedSessionController extends Controller
     {
         Auth::guard('web')->logout();
 
-
         $request->session()->invalidate();
 
-
         $request->session()->regenerateToken();
-
 
         return redirect('/');
     }

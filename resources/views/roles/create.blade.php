@@ -21,6 +21,24 @@
 
     <div class="card-block">
 
+        @if ($errors->any())
+
+        <div class="alert alert-danger">
+
+            <ul class="mb-0">
+
+                @foreach ($errors->all() as $error)
+
+                <li>{{ $error }}</li>
+
+                @endforeach
+
+            </ul>
+
+        </div>
+
+        @endif
+
         <form action="{{ route('roles.store') }}" method="POST">
 
             @csrf
@@ -40,7 +58,8 @@
                             name="name"
                             class="form-control mera-input"
                             placeholder="Ingrese el nombre del rol"
-                            required>
+                            required
+                            value="{{ old('name') }}">
 
                     </div>
 
@@ -66,9 +85,9 @@
                             <input
                                 class="form-check-input"
                                 type="checkbox"
-                                id="permission{{ $permission->id }}"
                                 name="permissions[]"
-                                value="{{ $permission->name }}">
+                                value="{{ $permission->name }}"
+                                {{ in_array($permission->name, old('permissions', [])) ? 'checked' : '' }}>
 
                             <label
                                 class="form-check-label"

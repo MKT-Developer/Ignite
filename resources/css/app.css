@@ -1429,76 +1429,55 @@ body .pcoded[pcoded-device-type="tablet"][vertical-nav-type="expanded"] .pcoded-
     display: none;
 }
 
-
 @media only screen and (max-width: 768px) {
-
-
     .mera-table-desktop {
         display: none;
     }
-
 
     .mera-courses-mobile {
         display: block;
     }
 
-
     .mera-course-card {
-
         background: #fff;
         border-radius: 10px;
         padding: 15px;
         margin-bottom: 15px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
-
     }
 
 
     .mera-course-header {
-
         font-size: 16px;
         font-weight: 600;
         margin-bottom: 15px;
-
     }
 
-
     .mera-course-cover {
-
         text-align: center;
         margin-bottom: 15px;
-
 
         img {
 
             max-width: 150px;
             width: 100%;
-
         }
-
     }
 
-
     .mera-course-info {
-
         margin-bottom: 15px;
 
         strong {
             display: block;
             margin-bottom: 5px;
         }
-
     }
 
-
     .mera-course-actions {
-
         display: flex;
         justify-content: flex-end;
         gap: 10px;
-
     }
-
 }
 
 /* CURSOS - RESPONSIVIDAD*/
@@ -1507,252 +1486,1140 @@ body .pcoded[pcoded-device-type="tablet"][vertical-nav-type="expanded"] .pcoded-
 /* =====================================
         MERA DASHBOARD
 ===================================== */
-
-
 .mera-dashboard-card {
-
     background: #fff;
     border-radius: 22px;
     padding: 25px;
-
     display: flex;
     align-items: center;
     gap: 20px;
-
     margin-bottom: 25px;
-
     box-shadow:
         0 10px 25px rgba(2, 77, 37, .12);
-
     transition: .3s ease;
-
 }
-
 
 .mera-dashboard-card:hover {
-
     transform: translateY(-5px);
-
 }
-
 
 .mera-dashboard-card span {
-
     color: #8A8C91;
     font-size: 14px;
-
 }
 
-
 .mera-dashboard-card h3 {
-
     color: #024D25;
     font-size: 32px;
     font-weight: 700;
-
     margin: 5px 0 0;
-
 }
 
-
-
 .mera-dashboard-icon {
-
     width: 65px;
     height: 65px;
-
     border-radius: 50%;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-size: 26px;
-
 }
-
-
 
 .mera-green {
-
     background: #93C01F;
     color: #024D25;
-
 }
-
 
 .mera-blue {
-
     background: #81CFF4;
     color: #024D25;
-
 }
-
 
 .mera-aqua {
-
     background: #8CBCC4;
     color: #024D25;
-
 }
-
 
 .mera-dark {
-
     background: #024D25;
     color: white;
-
 }
-
-
 
 /* SECCIONES */
-
 .mera-dashboard-section {
-
     border: none;
     border-radius: 22px;
-
     box-shadow:
         0 10px 25px rgba(2, 77, 37, .12);
-
     margin-bottom: 25px;
-
 }
 
-
-
 .mera-section-title {
-
     color: #024D25;
     font-weight: 700;
     margin-bottom: 12px;
 }
 
-
-
 /* ACCESOS */
-
-
 .mera-shortcut {
-
     height: 120px;
-
     border-radius: 18px;
-
     background:
         linear-gradient(135deg,
             #024D25,
             #55882B);
-
     color: white !important;
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
-
     align-items: center;
-
     gap: 10px;
-
     font-size: 18px;
-
     transition: .3s;
-
 }
-
-
 
 .mera-shortcut i {
-
     font-size: 30px;
-
     color: #93C01F;
-
 }
 
-
-
 .mera-shortcut:hover {
-
     transform: translateY(-5px);
-
     background:
         linear-gradient(135deg,
             #55882B,
             #81CFF4);
-
 }
-
-
 
 /* CURSOS RECIENTES */
-
 .mera-recent-item {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     padding: 15px 0;
-
     border-bottom: 1px solid #edf2ef;
-
 }
-
-
 
 .mera-recent-item strong {
-
     display: block;
-
     color: #024D25;
-
 }
-
 
 .mera-recent-item small {
-
     color: #8A8C91;
-
 }
-
 
 .mera-view-btn {
-
     background: #93C01F;
-
     color: #024D25 !important;
-
     border-radius: 20px;
-
     padding: 6px 18px;
-
     font-weight: 700;
-
 }
 
-
-
 @media(max-width:768px) {
-
     .mera-dashboard-card {
-
         padding: 20px;
-
     }
-
 
     .mera-shortcut {
-
         margin-bottom: 15px;
-
     }
-
 }
 
 /* DASHBOARD */
+
+/* PORTAL USER */
+body.portal-user .pcoded-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+body.portal-user .pcoded-main-container {
+    margin-left: 0 !important;
+}
+
+/* PORTAL */
+.portal-hero {
+    width: 100%;
+    min-height: clamp(550px, 80vh, 700px);
+    /* background-image: url('/images/portal/banner-evento.webp'); */
+    background-image: url('../images/portal/banner-evento.webp');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.portal-hero-overlay {
+    width: 100%;
+    min-height: 700px;
+    background: rgba(0, 0, 0, .25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.portal-hero-content {
+    max-width: 900px;
+    text-align: center;
+    padding: 60px 20px;
+    color: white;
+}
+
+.portal-event-logo {
+    display: block;
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto 35px;
+}
+
+.portal-description {
+    font-size: clamp(18px, 3vw, 28px);
+    line-height: 1.4;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.portal-date-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background: #9BCDF2;
+    border-radius: 12px;
+    padding: 14px 40px;
+    color: #000;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.portal-date-btn i {
+    font-size: 24px;
+}
+
+.portal-date-text {
+    color: white;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.portal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.portal-btn-program,
+.portal-btn-outline {
+    min-width: 220px;
+    padding: 15px 35px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.portal-btn-program {
+    background: #93C01F;
+    color: white;
+}
+
+.portal-btn-outline {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+}
+
+.portal-btn-program:hover,
+.portal-btn-outline:hover {
+    opacity: .85;
+}
+
+@media(max-width:576px) {
+    .portal-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .portal-btn-program,
+    .portal-btn-outline {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* BANNER */
+
+/* ==========================
+   PORTAL GALLERY
+========================== */
+.portal-gallery {
+    width: 100%;
+}
+
+.portal-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+}
+
+.portal-gallery-item {
+    width: 100%;
+    overflow: hidden;
+}
+
+.portal-gallery-item img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    transition: transform .4s ease;
+}
+
+.portal-gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Tablets */
+@media(max-width:992px) {
+    .portal-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .portal-gallery-item img {
+        height: 280px;
+    }
+}
+
+/* Móviles */
+@media(max-width:576px) {
+    .portal-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .portal-gallery-item img {
+        height: 240px;
+    }
+}
+
+/* ==========================
+   LOCATION SECTION
+========================== */
+/* .portal-hero {
+    width: 100%;
+    min-height: clamp(550px, 80vh, 700px);
+    background-image: url('../images/portal/banner-evento.webp');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.portal-hero-overlay {
+    width: 100%;
+    min-height: 700px;
+    background: rgba(0, 0, 0, .25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+.portal-location-header {
+    background-image: url('../images/portal/seccion-uno.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    /* background: #f5f5f5; */
+
+    text-align: center;
+}
+
+.portal-location-overlay {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.50);
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
+
+.portal-location-title {
+    padding: 80px 20px;
+}
+
+.portal-location-title h2 {
+    color: #93C01F;
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.portal-location-title p {
+    max-width: 850px;
+    margin: auto;
+    font-size: 22px;
+    color: #444;
+    line-height: 1.5;
+}
+
+/* ==========================
+   HOTEL CONTENT
+========================== */
+.portal-location-bg {
+    background-image: url('../images/portal/seccion-dos.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.portal-location-content {
+    /* background: #ffffff; */
+    padding: 70px 5%;
+}
+
+.portal-hotel-logo {
+    display: block;
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto 50px;
+}
+
+.portal-hotel-logo img {
+    max-width: 280px;
+    width: 100%;
+}
+
+/* GRID */
+.portal-hotel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: stretch;
+}
+
+/* GALERIA */
+.portal-hotel-gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.hotel-gallery-main img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+}
+
+.hotel-gallery-small {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.hotel-gallery-small img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+/* MAPA */
+.portal-hotel-map {
+    min-height: 582px;
+    border: 12px solid hsl(0deg 0% 0% / 10%);
+    border-radius: 12px;
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 45px rgba(0, 43, 92, 0.15),
+        0 8px 20px rgba(0, 0, 0, 0.08);
+
+    transition: .3s ease;
+}
+
+.portal-hotel-map:hover {
+    box-shadow:
+        0 25px 55px rgba(0, 43, 92, 0.20),
+        0 12px 25px rgba(0, 0, 0, 0.10);
+}
+
+.portal-hotel-map iframe {
+    width: 100%;
+    height: 100%;
+}
+
+/* TABLET */
+@media(max-width:992px) {
+    .portal-hotel-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .portal-hotel-map {
+        min-height: 400px;
+    }
+}
+
+/* MOBILE */
+@media(max-width:576px) {
+    .portal-location-title h2 {
+        font-size: 32px;
+    }
+
+    .portal-location-title p {
+        font-size: 18px;
+    }
+
+    .portal-location-content {
+        padding: 40px 20px;
+    }
+
+    .hotel-gallery-main img {
+        height: 250px;
+    }
+
+    .hotel-gallery-small img {
+        height: 180px;
+    }
+}
+
+/* ===========================
+   INCLUYE REGISTRO
+=========================== */
+/* .portal-location-header {
+    background-image: url('../images/portal/seccion-uno.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.portal-location-overlay {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.80);
+} */
+
+.include-header-bg {
+    background-image: url('../images/portal/seccion-tres.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.incluye-header {
+    /* background: #f4f4f4; */
+    padding: 70px 20px;
+}
+
+.incluye-header h2 {
+    color: #93C01F;
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.incluye-header p {
+    color: #555;
+    font-size: 20px;
+    max-width: 850px;
+    margin: auto;
+}
+
+.include-content-bg {
+    background-image: url('../images/portal/bg-hilton.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.incluye-content {
+    /* background: #ffffff; */
+    padding: 70px 20px;
+}
+
+.incluye-cards-wrapper {
+    max-width: 850px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.incluye-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, .08);
+}
+
+.incluye-card-title {
+    width: 100%;
+    border-radius: 12px;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 25px;
+}
+
+.no-incluido {
+    background: #D9534F;
+}
+
+.incluido {
+    background: #93C01F;
+}
+
+.incluye-card ul {
+    padding-left: 25px;
+    margin: 0;
+}
+
+.incluye-card li {
+    margin-bottom: 12px;
+    font-size: 17px;
+    line-height: 1.5;
+    color: #444;
+}
+
+@media(max-width:768px) {
+    .incluye-header h2 {
+        font-size: 30px;
+    }
+
+    .incluye-header p {
+        font-size: 17px;
+    }
+
+    .incluye-card {
+        padding: 20px;
+    }
+
+    .incluye-card-title {
+        font-size: 18px;
+    }
+}
+
+/* ===========================
+   CÓDIGO DE VESTIMENTA
+=========================== */
+.dresscode-header-bg {
+    background-image: url('../images/portal/seccion-cinco.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.dresscode-section {
+    /* background: #f7f7f7; */
+    padding: 70px 20px;
+}
+
+.dresscode-header {
+    margin-bottom: 60px;
+}
+
+.dresscode-header h2 {
+    color: #93C01F;
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.dresscode-header p {
+    max-width: 850px;
+    margin: auto;
+    font-size: 20px;
+    color: #555;
+}
+
+.dresscode-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    margin-bottom: 35px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, .08);
+}
+
+.dresscode-info {
+    width: 50%;
+    padding: 50px;
+    text-align: center;
+}
+
+.dresscode-info h3 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.3;
+}
+
+.dresscode-info h3 span {
+    color: #93C01F;
+    font-weight: 700;
+}
+
+.dresscode-btn {
+    display: inline-flex;
+    margin-top: 30px;
+    padding: 14px 35px;
+    background: #93C01F;
+    color: white;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.dresscode-btn:hover {
+    background: #7da718;
+    color: white;
+}
+
+.dresscode-image {
+    width: 50%;
+    height: 420px;
+}
+
+.dresscode-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media(max-width:768px) {
+    .dresscode-header h2 {
+        font-size: 30px;
+    }
+
+    .dresscode-header p {
+        font-size: 17px;
+    }
+
+    .dresscode-card {
+        flex-direction: column;
+    }
+
+    .dresscode-info,
+    .dresscode-image {
+        width: 100%;
+    }
+
+    .dresscode-info {
+        padding: 30px 20px;
+    }
+
+    .dresscode-info h3 {
+        font-size: 25px;
+    }
+
+    .dresscode-image {
+        height: 320px;
+    }
+}
+
+/* ======================================================
+   TOKENS COMPARTIDOS
+====================================================== */
+:root {
+    --portal-navy: #024D25;
+    --portal-green: #93C01F;
+    --portal-text: #1B1B1B;
+    --portal-muted: #6C7A89;
+    --portal-border: #E7ECF2;
+    --portal-bg-alt: #F9FBFD;
+}
+
+/* ======================================================
+   ENCABEZADOS DE SECCIÓN (compartido)
+====================================================== */
+.portal-section-heading {
+    margin-bottom: 45px;
+    text-align: center;
+}
+
+.portal-checkin .portal-section-heading {
+    margin-bottom: 25px;
+}
+
+.portal-section-label {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    color: var(--portal-green);
+    margin-bottom: 10px;
+}
+
+.portal-section-title,
+.dresscode-header {
+    color: var(--portal-navy);
+    font-size: 38px;
+    font-weight: 700;
+    margin: 0 0 15px;
+}
+
+.portal-section-heading.text-center {
+    text-align: center;
+}
+
+.portal-section-heading.text-center .portal-section-label {
+    display: block;
+}
+
+/* ======================================================
+   CHECK-IN
+====================================================== */
+.portal-checkin {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+
+.checkin-intro {
+    max-width: 800px;
+    margin: 0 0 45px;
+    color: var(--portal-muted);
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.checkin-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+}
+
+.checkin-nav button {
+    padding: 14px 32px;
+    border: none;
+    border-radius: 10px;
+    background: #E9EEF5;
+    color: var(--portal-navy);
+    font-weight: 700;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.checkin-nav button:hover {
+    background: #DCE4EF;
+}
+
+.checkin-nav button.active {
+    background: var(--portal-green);
+    color: #FFF;
+}
+
+.checkin-process {
+    margin-bottom: 60px;
+}
+
+.checkin-process:last-child {
+    margin-bottom: 0;
+}
+
+.checkin-process-title {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 25px;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--portal-navy);
+}
+
+.checkin-process-title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 6px;
+    height: 26px;
+    background: var(--portal-green);
+    border-radius: 5px;
+}
+
+.checkin-table {
+    border-radius: 18px;
+    overflow: hidden;
+    background: #FFF;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .08);
+}
+
+.checkin-header {
+    display: grid;
+    grid-template-columns: 180px 1fr 260px;
+    background: var(--portal-navy);
+    color: #FFF;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: .5px;
+}
+
+.checkin-header div {
+    padding: 18px 24px;
+}
+
+.checkin-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 260px;
+    background: #FFF;
+    border-bottom: 1px solid var(--portal-border);
+    transition: background .25s ease;
+}
+
+.checkin-row:last-child {
+    border-bottom: none;
+}
+
+.checkin-row:nth-child(even) {
+    background: var(--portal-bg-alt);
+}
+
+.checkin-row:hover {
+    background: #F4F8FB;
+}
+
+.checkin-row div {
+    padding: 20px 24px;
+}
+
+.checkin-time {
+    font-weight: 800;
+    color: var(--portal-navy);
+}
+
+.checkin-activity {
+    color: var(--portal-text);
+    font-size: 16px;
+}
+
+.checkin-location {
+    color: var(--portal-muted);
+    font-weight: 600;
+}
+
+/* ======================================================
+   PROGRAMA DEL EVENTO
+====================================================== */
+.portal-schedule {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+
+.schedule-intro {
+    max-width: 800px;
+    margin: 0 0 45px;
+    color: var(--portal-muted);
+    font-size: 17px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.schedule-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 50px;
+}
+
+.schedule-nav button {
+    padding: 14px 32px;
+    border: none;
+    border-radius: 10px;
+    background: #E9EEF5;
+    color: var(--portal-navy);
+    font-weight: 700;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.schedule-nav button:hover {
+    background: #DCE4EF;
+}
+
+.schedule-nav button.active {
+    background: var(--portal-green);
+    color: #FFF;
+}
+
+.schedule-day-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.schedule-day-header h3 {
+    color: var(--portal-navy);
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.schedule-day-header span {
+    color: var(--portal-green);
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.event-table {
+    border-radius: 18px;
+    overflow: hidden;
+    background: #FFF;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .08);
+}
+
+.event-header {
+    display: grid;
+    grid-template-columns: 180px 1fr 260px;
+    background: var(--portal-navy);
+    color: #FFF;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: .5px;
+}
+
+.event-header div {
+    padding: 18px 24px;
+}
+
+.event-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 260px;
+    background: #FFF;
+    border-bottom: 1px solid var(--portal-border);
+    transition: background .25s ease;
+}
+
+.event-row:last-child {
+    border-bottom: none;
+}
+
+.event-row:nth-child(even) {
+    background: var(--portal-bg-alt);
+}
+
+.event-row:hover {
+    background: #F4F8FB;
+}
+
+.event-row div {
+    padding: 20px 24px;
+}
+
+.event-time {
+    font-weight: 800;
+    color: var(--portal-navy);
+}
+
+.event-activity {
+    color: var(--portal-text);
+    font-size: 16px;
+}
+
+.event-location {
+    color: var(--portal-muted);
+    font-weight: 600;
+}
+
+/* ======================================================
+   MOBILE (compartido)
+====================================================== */
+@media (max-width: 768px) {
+
+    .portal-checkin,
+    .portal-schedule {
+        margin: 50px auto;
+    }
+
+    .portal-section-title,
+    .dresscode-header {
+        font-size: 28px;
+    }
+
+    .checkin-process-title {
+        font-size: 20px;
+    }
+
+    .checkin-nav,
+    .schedule-nav {
+        flex-wrap: wrap;
+    }
+
+    .checkin-header,
+    .event-header {
+        display: none;
+    }
+
+    .checkin-row,
+    .event-row {
+        display: block;
+        padding: 22px;
+    }
+
+    .checkin-row div,
+    .event-row div {
+        padding: 5px 0;
+    }
+
+    .checkin-row div::before,
+    .event-row div::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        color: var(--portal-muted);
+        margin-bottom: 2px;
+    }
+
+    .checkin-time,
+    .event-time {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .checkin-activity,
+    .event-activity {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .checkin-location,
+    .event-location {
+        color: var(--portal-green);
+        font-weight: 700;
+    }
+
+    .schedule-day-header {
+        flex-direction: column;
+        gap: 4px;
+    }
+}
