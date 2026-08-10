@@ -15,7 +15,7 @@ $isPortalUser = auth()->check() && auth()->user()->hasRole('user');
 
             @endif
 
-            <a class="text-left" href="{{ $isPortalUser ? route('portal.index') : route('dashboard') }}">
+            <a class="text-left" href="{{ $isPortalUser ? route('portal') : route('dashboard') }}">
                 <img class="img-fluid h-10" src="{{ asset('images/../images/portal/meraignite-horizontal.png') }}" alt="Theme-Logo">
             </a>
 
@@ -125,9 +125,17 @@ $isPortalUser = auth()->check() && auth()->user()->hasRole('user');
                                 </span>
 
                                 <small class="mera-user-role">
-                                    {{ Auth::user()->getRoleNames()->first() ?? 'Usuario' }}
-                                </small>
+                                    @php
+                                    $role = Auth::user()->getRoleNames()->first();
+                                    @endphp
 
+                                    {{ match ($role) {
+                                        'admin' => 'Administrador',
+                                        'user' => 'Colaborador',
+                                        'super admin' => 'Super Administrador',
+                                        default => 'Usuario',
+                                    } }}
+                                </small>
                             </div>
 
                             <i class="feather icon-chevron-down"></i>

@@ -17,13 +17,13 @@
             </p>
 
             {{-- Fecha --}}
-            <a href="#fecha" class="portal-date-btn">
+            <div class="portal-date-btn">
                 <i class="fa fa-calendar"></i>
 
                 <span>
                     FECHA
                 </span>
-            </a>
+            </div>
 
             <p class="portal-date-text">
                 Del 31 de Agosto al 02 Septiembre de 2026
@@ -235,8 +235,9 @@
     </div>
 </section>
 
+
 <!-- CHECK-IN -->
-<section class="portal-checkin">
+<section class="portal-checkin" id="registro">
     <div class="portal-section-heading text-center">
 
         <h2 class="dresscode-header">
@@ -254,7 +255,7 @@
 <!-- CHECK-IN -->
 
 <!-- PROGRAMA DEL EVENTO -->
-<section class="portal-schedule">
+<section class="portal-schedule" id="programa">
     <div class="portal-section-heading">
         <span class="portal-section-label">
             Agenda del evento
@@ -326,7 +327,7 @@
                     </span>
                 </h3>
 
-                <a href="LINK_PINTEREST_DAMAS" target="_blank" class="dresscode-btn">
+                <a href="https://pin.it/5yK3vzdkV" target="_blank" class="dresscode-btn">
                     Ver ejemplos
                 </a>
             </div>
@@ -351,7 +352,7 @@
                     </span>
                 </h3>
 
-                <a href="LINK_PINTEREST_CABALLEROS" target="_blank" class="dresscode-btn">
+                <a href="https://pin.it/2vQNdxoXv" target="_blank" class="dresscode-btn">
                     Ver ejemplos
                 </a>
             </div>

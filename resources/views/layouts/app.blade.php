@@ -47,7 +47,7 @@ $isPortal = auth()->check() && auth()->user()->hasRole('user');
 
 <!-- <body class="font-sans antialiased {{ auth()->check() && auth()->user()->hasRole('user') ? 'portal-user' : '' }}"> -->
 
-<body class="{{ $isPortal ? 'portal-user' : '' }}">
+<body class="{{ $isPortal ? 'portal-user' : 'portal-admin' }}">
     <div id="anti-screenshot-overlay"></div>
     <!-- [ Pre-loader ] start -->
     <div class="loader-bg">

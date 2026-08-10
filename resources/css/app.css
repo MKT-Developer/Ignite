@@ -1630,6 +1630,10 @@ body .pcoded[pcoded-device-type="tablet"][vertical-nav-type="expanded"] .pcoded-
 /* DASHBOARD */
 
 /* PORTAL USER */
+body.portal-admin .pcoded-content {
+padding: 1.5rem 3rem;
+}
+
 body.portal-user .pcoded-content {
     margin-left: 0 !important;
     width: 100% !important;
@@ -1653,7 +1657,7 @@ body.portal-user .pcoded-main-container {
 .portal-hero-overlay {
     width: 100%;
     min-height: 700px;
-    background: rgba(0, 0, 0, .25);
+    background: rgba(0, 0, 0, .50);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1703,6 +1707,7 @@ body.portal-user .pcoded-main-container {
     font-size: 20px;
     margin-top: 20px;
     margin-bottom: 40px;
+    font-weight: 600;
 }
 
 .portal-actions {

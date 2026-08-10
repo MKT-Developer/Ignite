@@ -60,8 +60,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/portal', function () {
         return view('portal.index');
     })
-        ->middleware('role:user')
-        ->name('portal.index');
+        ->name('portal');
 });
 
 require __DIR__ . '/auth.php';
