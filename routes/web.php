@@ -52,6 +52,23 @@ Route::middleware('auth')->group(function () {
 });
 require __DIR__ . '/auth.php';
 
+Route::get('/language/{locale}', function ($locale) {
+
+    if ($locale === 'auto') {
+        session()->forget('locale');
+
+        return redirect()->back();
+    }
+
+    if (! in_array($locale, ['es', 'en'], true)) {
+        abort(404);
+    }
+
+    session(['locale' => $locale]);
+
+    return redirect()->back();
+})->name('language.switch');
+
 // Route::get('/', function () {
 //     return view('auth.login');
 // })->middleware('guest')->name('home');

@@ -239,6 +239,7 @@
 .header-navbar .navbar-wrapper .navbar-container .nav-left li,
 .header-navbar .navbar-wrapper .navbar-container .nav-right li {
     line-height: 5;
+    padding: 0 10px;
 }
 
 .pcoded[theme-layout="vertical"].pcoded-wrapper,
@@ -1359,14 +1360,23 @@ body .pcoded[pcoded-device-type="tablet"][vertical-nav-type="expanded"] .pcoded-
         right: -25px;
         visibility: visible;
         overflow: visible;
-        width: 24rem;
+        width: 15rem;
         padding: 15px 0;
         -webkit-transform: translateY(20px);
         transform: translateY(20px);
     }
 
-    .profile_mobile li:first-child {
+    /* .profile_mobile li:first-child {
         padding: 0.7em 20px;
+    } */
+
+    .language-switcher {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        justify-content: center;
+        align-items: center;
     }
 
     .profile_mobile li {
@@ -1380,7 +1390,7 @@ body .pcoded[pcoded-device-type="tablet"][vertical-nav-type="expanded"] .pcoded-
     .profile_mobile li {
         float: left;
         line-height: 2.4;
-        padding: 0 20px;
+        padding: 5px 20px;
         cursor: pointer;
         position: relative;
     }
@@ -1631,7 +1641,7 @@ body .pcoded[pcoded-device-type="tablet"][vertical-nav-type="expanded"] .pcoded-
 
 /* PORTAL USER */
 body.portal-admin .pcoded-content {
-padding: 1.5rem 3rem;
+    padding: 1.5rem 3rem;
 }
 
 body.portal-user .pcoded-content {
@@ -2628,3 +2638,279 @@ body.portal-user .pcoded-main-container {
         gap: 4px;
     }
 }
+
+/* LENGUAJE */
+/* ============================================================
+MERA LANGUAGE SWITCHER
+Selector de idioma - estilo corporativo premium
+============================================================ */
+.language-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 4px;
+    /* Light mode */
+    background: #F3F7F5;
+    border: 1px solid #DCE8E1;
+    border-radius: 12px;
+    box-shadow:
+        0 2px 6px rgba(2, 77, 37, .06),
+        0 6px 18px rgba(2, 77, 37, .08);
+    transition:
+        border-color .25s ease,
+        box-shadow .25s ease,
+        background-color .25s ease;
+    vertical-align: middle;
+}
+
+.language-switcher:hover {
+    border-color: rgba(2, 77, 37, .22);
+    box-shadow:
+        0 3px 8px rgba(2, 77, 37, .08),
+        0 8px 22px rgba(2, 77, 37, .11);
+}
+
+/* ============================================================
+IDIOMAS
+============================================================ */
+.language-switcher a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-width: 92px;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 9px;
+    background: transparent;
+    color: #024D25;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: .15px;
+    white-space: nowrap;
+    transition:
+        color .2s ease,
+        background-color .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease;
+}
+
+.language-switcher a:hover {
+    color: #024D25;
+    background: rgba(129, 207, 244, .20);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+/* ============================================================
+IDIOMA ACTIVO
+============================================================ */
+/* .language-switcher a.active { */
+.pcoded .pcoded-header[header-theme="themelight1"] .language-switcher a.active {
+    color: #FFFFFF;
+    background: linear-gradient(135deg,
+            #024D25 0%,
+            #55882B 100%);
+    font-weight: 700;
+    box-shadow:
+        0 3px 8px rgba(2, 77, 37, .22),
+        inset 0 1px 0 rgba(255, 255, 255, .12);
+    transform: none;
+}
+
+.language-switcher a.active:hover {
+    color: #FFFFFF;
+    background: linear-gradient(135deg,
+            #024D25 0%,
+            #55882B 100%);
+    transform: translateY(-1px);
+    box-shadow:
+        0 5px 12px rgba(2, 77, 37, .25),
+        inset 0 1px 0 rgba(255, 255, 255, .12);
+}
+
+/* ============================================================
+ICONOS / BANDERAS
+Si tus enlaces contienen iconos o banderas
+============================================================ */
+.language-switcher a i,
+.language-switcher a img,
+.language-switcher a svg {
+    flex-shrink: 0;
+}
+
+.language-switcher a img {
+    width: 18px;
+    height: 18px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, .12);
+}
+
+/* ============================================================
+SEPARADOR VISUAL
+============================================================ */
+.language-switcher a+a::before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: 50%;
+    width: 1px;
+    height: 16px;
+    background: #D5E2DB;
+    transform: translateY(-50%);
+    opacity: .8;
+    transition: opacity .2s ease;
+}
+
+/* Cuando uno de los idiomas está activo,
+el separador pierde protagonismo */
+.language-switcher a.active+a::before,
+.language-switcher a:hover+a::before {
+    opacity: 0;
+}
+
+/* ============================================================
+DARK MODE
+============================================================ */
+
+body.dark-mode .language-switcher {
+    background: rgba(255, 255, 255, .08);
+    border-color: rgba(255, 255, 255, .16);
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, .18),
+        inset 0 1px 0 rgba(255, 255, 255, .05);
+}
+
+body.dark-mode .language-switcher:hover {
+    background: rgba(255, 255, 255, .11);
+    border-color: rgba(129, 207, 244, .35);
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, .22),
+        0 0 0 1px rgba(129, 207, 244, .05);
+}
+
+body.dark-mode .language-switcher a {
+    color: #D9F2E5;
+}
+
+body.dark-mode .language-switcher a:hover {
+    color: #FFFFFF;
+    background: rgba(129, 207, 244, .15);
+}
+
+body.dark-mode .language-switcher a.active {
+    color: #024D25;
+    background: linear-gradient(135deg,
+            #93C01F 0%,
+            #81CFF4 100%);
+    box-shadow:
+        0 4px 12px rgba(129, 207, 244, .20),
+        inset 0 1px 0 rgba(255, 255, 255, .25);
+}
+
+body.dark-mode .language-switcher a.active:hover {
+    color: #024D25;
+    background: linear-gradient(135deg,
+            #93C01F 0%,
+            #81CFF4 100%);
+}
+
+body.dark-mode .language-switcher a+a::before {
+    background: rgba(255, 255, 255, .20);
+}
+
+/* ============================================================
+MOBILE
+============================================================ */
+@media (max-width: 992px) {
+    .mobile-language {
+        text-align: center;
+    }
+
+    .language-switcher {
+        display: inline-flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        padding: 4px;
+        border-radius: 11px;
+    }
+
+    .language-switcher a {
+        min-width: 82px;
+        height: 34px;
+        padding: 0 11px;
+        font-size: 11px;
+    }
+}
+
+/* ============================================================
+MOBILE PEQUEÑO
+============================================================ */
+@media (max-width: 576px) {
+    .language-switcher {
+        gap: 2px;
+        padding: 3px;
+        border-radius: 10px;
+    }
+
+    .language-switcher a {
+        min-width: 72px;
+        height: 32px;
+        padding: 0 9px;
+        font-size: 10px;
+    }
+
+    .language-switcher a+a::before {
+        height: 14px;
+    }
+}
+
+/* ============================================================
+SI EL SWITCHER ESTÁ DENTRO DE profile_mobile
+============================================================ */
+.profile_mobile .language-switcher {
+    display: inline-flex;
+    flex-direction: row;
+    width: auto;
+    margin: 0 auto;
+    padding: 4px;
+}
+
+.profile_mobile .language-switcher a {
+    width: auto;
+    min-width: 82px;
+    padding: 0 12px;
+    height: 34px;
+}
+
+/* ============================================================
+ACCESIBILIDAD
+============================================================ */
+.language-switcher a:focus-visible {
+    outline: 2px solid #81CFF4;
+    outline-offset: 2px;
+}
+
+/* Reduce movimiento si el usuario lo solicita */
+@media (prefers-reduced-motion: reduce) {
+
+    .language-switcher,
+    .language-switcher a {
+        transition: none;
+    }
+
+    .language-switcher a:hover,
+    .language-switcher a.active:hover {
+        transform: none;
+    }
+}
+
+/* LENGUAJE */

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Portal')
+@section('title', __('portal.title'))
 
 @section('content')
 
@@ -8,12 +8,15 @@
 <section class="portal-hero">
     <div class="portal-hero-overlay">
         <div class="portal-hero-content">
+
             {{-- Imagen superior --}}
-            <img src="{{ asset('/images/portal/logo-ignite-white.png') }}" class="portal-event-logo" alt="Evento">
+            <img
+                src="{{ asset('/images/portal/logo-ignite-white.png') }}"
+                class="portal-event-logo"
+                alt="{{ __('portal.banner.event_logo_alt') }}">
 
             <p class="portal-description">
-                3 días de reflexión estratégica, conexiones de alto nivel y visión de industria en un entorno
-                excepcional.
+                {{ __('portal.banner.description') }}
             </p>
 
             {{-- Fecha --}}
@@ -21,28 +24,30 @@
                 <i class="fa fa-calendar"></i>
 
                 <span>
-                    FECHA
+                    {{ __('portal.banner.date_label') }}
                 </span>
             </div>
 
             <p class="portal-date-text">
-                Del 31 de Agosto al 02 Septiembre de 2026
+                {{ __('portal.banner.date') }}
             </p>
 
             {{-- Botones --}}
             <div class="portal-actions">
                 <a href="#programa" class="portal-btn-program">
-                    VER PROGRAMA
+                    {{ __('portal.banner.view_program') }}
                 </a>
 
                 <a href="#registro" class="portal-btn-outline">
-                    REGISTRO
+                    {{ __('portal.banner.registration') }}
                 </a>
             </div>
+
         </div>
     </div>
 </section>
 <!-- BANNER -->
+
 
 <!-- GRID -->
 <section class="portal-gallery">
@@ -52,28 +57,25 @@
         <div class="portal-gallery-item">
             <img
                 src="{{ asset('../images/portal/foto-1.webp') }}"
-                alt="Galería 1">
+                alt="{{ __('portal.gallery.image_1') }}">
         </div>
-
 
         <div class="portal-gallery-item">
             <img
                 src="{{ asset('../images/portal/foto-2.webp') }}"
-                alt="Galería 2">
+                alt="{{ __('portal.gallery.image_2') }}">
         </div>
-
 
         <div class="portal-gallery-item">
             <img
                 src="{{ asset('../images/portal/foto-3.webp') }}"
-                alt="Galería 3">
+                alt="{{ __('portal.gallery.image_3') }}">
         </div>
-
 
         <div class="portal-gallery-item">
             <img
                 src="{{ asset('../images/portal/foto-4.webp') }}"
-                alt="Galería 4">
+                alt="{{ __('portal.gallery.image_4') }}">
         </div>
 
     </div>
@@ -81,16 +83,20 @@
 </section>
 <!-- GRID -->
 
+
 <!-- SEDE -->
 <section class="portal-location-header">
     <div class="portal-location-overlay">
         <div class="portal-location-title">
+
             <h2>
-                Sede del evento
+                {{ __('portal.location.title') }}
             </h2>
+
             <p>
-                Hilton Cancun, an All-Inclusive Resort es un lujoso hotel de playa ubicado en la zona costera hacia Puerto Morelos.
+                {{ __('portal.location.description') }}
             </p>
+
         </div>
     </div>
 </section>
@@ -98,22 +104,36 @@
 <section class="portal-location-bg">
     <div class="portal-location-overlay">
         <div class="portal-location-content">
+
             <div class="portal-hotel-logo">
-                <img src="{{ asset('images/portal/logo-hilton.webp') }}" alt="Hilton Cancun">
+                <img
+                    src="{{ asset('images/portal/logo-hilton.webp') }}"
+                    alt="Hilton Cancun">
             </div>
 
             <div class="portal-hotel-grid">
+
                 {{-- Galería --}}
                 <div class="portal-hotel-gallery">
+
                     <div class="hotel-gallery-main">
-                        <img src="{{ asset('images/portal/exterior-uno.webp') }}" alt="Hilton Cancun">
+                        <img
+                            src="{{ asset('images/portal/exterior-uno.webp') }}"
+                            alt="Hilton Cancun">
                     </div>
 
                     <div class="hotel-gallery-small">
-                        <img src="{{ asset('images/portal/exterior-dos.webp') }}" alt="Hilton Cancun">
 
-                        <img src="{{ asset('images/portal/exterior-tres.webp') }}" alt="Hilton Cancun">
+                        <img
+                            src="{{ asset('images/portal/exterior-dos.webp') }}"
+                            alt="Hilton Cancun">
+
+                        <img
+                            src="{{ asset('images/portal/exterior-tres.webp') }}"
+                            alt="Hilton Cancun">
+
                     </div>
+
                 </div>
 
                 {{-- Mapa --}}
@@ -128,262 +148,330 @@
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
+
             </div>
         </div>
     </div>
 </section>
 <!-- SEDE -->
 
+
 {{-- SECCIÓN INCLUYE TU REGISTRO --}}
 <section class="include-header-bg">
     <div class="portal-location-overlay">
+
         <div class="incluye-header">
 
             <div class="container text-center">
 
                 <h2>
-                    ¿Qué incluye tu registro?
+                    {{ __('portal.registration.includes_title') }}
                 </h2>
 
                 <p>
-                    Tu pase de participante cubre todo lo necesario para vivir la experiencia<br> completa del Ignite.
+                    {!! __('portal.registration.includes_description') !!}
                 </p>
-            </div>
-        </div>
-    </div>
 
+            </div>
+
+        </div>
+
+    </div>
 </section>
 
-<section class="include-content-bg ">
+
+<section class="include-content-bg">
+
     <div class="incluye-content">
+
         <div class="container">
+
             <div class="incluye-cards-wrapper">
+
                 {{-- NO INCLUIDO --}}
                 <div class="incluye-card">
+
                     <div class="incluye-card-title no-incluido">
+
                         <span>
-                            No incluido
+                            {{ __('portal.registration.not_included_title') }}
                         </span>
 
                         <i class="fa fa-times"></i>
+
                     </div>
 
                     <ul>
-                        <li>Servicio de lavandería.</li>
-                        <li>Compras en tabaquería.</li>
-                        <li>Tours.</li>
-                        <li>Transportación.</li>
-                        <li>Minibar.</li>
-                        <li>Servicio a cuartos.</li>
+
+                        <li>
+                            {{ __('portal.registration.not_included.laundry') }}
+                        </li>
+
+                        <li>
+                            {{ __('portal.registration.not_included.tobacco') }}
+                        </li>
+
+                        <li>
+                            {{ __('portal.registration.not_included.tours') }}
+                        </li>
+
+                        <li>
+                            {{ __('portal.registration.not_included.transportation') }}
+                        </li>
+
+                        <li>
+                            {{ __('portal.registration.not_included.minibar') }}
+                        </li>
+
+                        <li>
+                            {{ __('portal.registration.not_included.room_service') }}
+                        </li>
+
                     </ul>
 
                 </div>
+
 
                 {{-- INCLUIDO --}}
                 <div class="incluye-card">
+
                     <div class="incluye-card-title incluido">
+
                         <i class="fa fa-check"></i>
 
                         <span>
-                            Incluido en tu pase
+                            {{ __('portal.registration.included_title') }}
                         </span>
+
                     </div>
 
                     <ul>
-                        <li>Bebida de bienvenida y toalla fresca a la llegada.</li>
-                        <li>Desayuno, almuerzo y cena diarios, y refrigerios en hasta seis restaurantes del Resort, de forma continua durante las horas de atención al público.</li>
-                        <li>Selección de bebidas y cócteles especiales del Resort en bares y restaurantes seleccionados, durante las horas de atención al público.</li>
-                        <li>Dulces ilimitados en la heladería y el puesto de dulces durante las horas de atención al público.</li>
-                        <li>Acceso a la piscina familiar, de adultos, y al servicio de playa en las horas permitidas del hotel.</li>
-                        <li>WiFi estándar ilimitado en todo el Resort para todos los participantes del grupo.</li>
-                        <li>Actividades diarias variadas del Resort y espectáculos nocturnos en vivo.</li>
-                        <li>Acceso al gimnasio y otras actividades de wellness.</li>
-                        <li>Seguridad las 24 horas.</li>
-                        <li>15% de descuento en tratamientos de masaje en el SPA Waldorf Astoria (no incluye manicura, tratamientos faciales, productos de SPA ni servicios de salón de belleza).</li>
+
+                        <li>
+                            {{ __('portal.registration.included.welcome' ) }}
+                        </li>
+
+                        <li>
+                            {{ __('portal.registration.included.meals' ) }}
+                        </li>
+
+                        <li>
+                            {{ __('portal.registration.included.drinks' ) }}
+                        </li>
+
+                        <li>
+                            {{ __('portal.registration.included.sweets' ) }}
+                        </li>
+
+                        <li>
+                            {{ __('portal.registration.included.pool_beach' ) }}
+                        </li>
+
+                        <li>
+                            {{ __('portal.registration.included.wifi' ) }}
+                        </li>
+
+                        <li>
+                            {{ __('portal.registration.included.activities' ) }}
+                        </li>
+
+                        <li>
+                            {{ __('portal.registration.included.gym' ) }}
+                        </li>
+
+                        <li>
+                            {{ __('portal.registration.included.security' ) }}
+                        </li>
+
+                        <li>
+                            {{ __('portal.registration.included.spa' ) }}
+                        </li>
+
                     </ul>
 
                 </div>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 
 <!-- CHECK-IN -->
 <section class="portal-checkin" id="registro">
+
     <div class="portal-section-heading text-center">
 
         <h2 class="dresscode-header">
-           Información de llegada
+            {{ __('portal.checkin.title') }}
         </h2>
 
         <p class="portal-section-label">
-            Lunes 31 de Agosto
+            {{ __('portal.checkin.date') }}
         </p>
 
     </div>
 
     <div id="schedule-list"></div>
+
 </section>
 <!-- CHECK-IN -->
 
+
 <!-- PROGRAMA DEL EVENTO -->
 <section class="portal-schedule" id="programa">
+
     <div class="portal-section-heading">
+
         <span class="portal-section-label">
-            Agenda del evento
+            {{ __('portal.schedule.label') }}
         </span>
 
         <h2 class="portal-section-title">
-            Programa
+            {{ __('portal.schedule.title') }}
         </h2>
 
         <p class="schedule-intro">
-            Consulta las actividades programadas durante el evento,
-            organizadas por día.
+            {{ __('portal.schedule.description') }}
         </p>
+
     </div>
+
 
     <!-- Navegación de días -->
     <nav class="schedule-nav">
+
         <button class="active" data-day="day1">
-            31 AGO
+            {{ __('portal.schedule.days.day1') }}
         </button>
 
         <button data-day="day2">
-            01 SEP
+            {{ __('portal.schedule.days.day2') }}
         </button>
 
         <button data-day="day3">
-            02 SEP
+            {{ __('portal.schedule.days.day3') }}
         </button>
 
         <button data-day="day4">
-            03 SEP
+            {{ __('portal.schedule.days.day4') }}
         </button>
+
     </nav>
+
 
     <!-- Contenedor dinámico -->
     <div id="event-schedule-list"></div>
+
 </section>
 <!-- PROGRAMA DEL EVENTO -->
 
 
 {{-- CÓDIGO DE VESTIMENTA --}}
 <section class="dresscode-header-bg">
+
     <div class="portal-location-overlay">
+
         <div class="dresscode-section">
+
             <div class="container">
+
                 <div class="dresscode-header text-center">
+
                     <h2>
-                        Código de vestimenta
+                        {{ __('portal.dresscode.title') }}
                     </h2>
 
                     <p>
-                        El código de vestimenta para las actividades del evento
+                        {{ __('portal.dresscode.description') }}
                     </p>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
+
 <section>
+
     <div class="container">
+
         {{-- DAMAS --}}
         <div class="dresscode-card">
+
             <div class="dresscode-info">
+
                 <h3>
-                    Vestimenta para las
+                    {{ __('portal.dresscode.ladies.title') }}
+
                     <span>
-                        Damas
+                        {{ __('portal.dresscode.ladies.highlight') }}
                     </span>
                 </h3>
 
-                <a href="https://pin.it/5yK3vzdkV" target="_blank" class="dresscode-btn">
-                    Ver ejemplos
+                <a
+                    href="https://pin.it/5yK3vzdkV"
+                    target="_blank"
+                    class="dresscode-btn">
+                    {{ __('portal.dresscode.view_examples') }}
                 </a>
+
             </div>
 
             <div class="dresscode-image">
-                <img src="{{ asset('../images/portal/referencia-mujer.webp') }}" alt="Vestimenta para damas">
+
+                <img
+                    src="{{ asset('../images/portal/referencia-mujer.webp') }}"
+                    alt="{{ __('portal.dresscode.ladies.image_alt') }}">
 
             </div>
+
         </div>
+
 
         {{-- CABALLEROS --}}
         <div class="dresscode-card">
+
             <div class="dresscode-image">
-                <img src="{{ asset('../images/portal/referencia-hombre.webp') }}" alt="Vestimenta para caballeros">
+
+                <img
+                    src="{{ asset('../images/portal/referencia-hombre.webp') }}"
+                    alt="{{ __('portal.dresscode.men.image_alt') }}">
+
             </div>
 
             <div class="dresscode-info">
+
                 <h3>
-                    Vestimenta para los
+                    {{ __('portal.dresscode.men.title') }}
+
                     <span>
-                        Caballeros
+                        {{ __('portal.dresscode.men.highlight') }}
                     </span>
                 </h3>
 
-                <a href="https://pin.it/2vQNdxoXv" target="_blank" class="dresscode-btn">
-                    Ver ejemplos
+                <a
+                    href="https://pin.it/2vQNdxoXv"
+                    target="_blank"
+                    class="dresscode-btn">
+                    {{ __('portal.dresscode.view_examples') }}
                 </a>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
-<!-- <div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <div class="card mera-card">
-                <div class="card-body text-center py-5">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo" style="max-height: 90px;" class="mb-4">
 
-                    <h2 class="mera-title mb-3">
-                        ¡Bienvenido, {{ auth()->user()->fullName() }}!
-                    </h2>
-
-                    <p class="mera-subtitle mb-4">
-                        Has iniciado sesión correctamente en el portal.
-                    </p>
-
-                    <hr>
-
-                    <div class="row mt-4">
-                        <div class="col-md-4">
-                            <h6 class="text-muted">
-                                Número de empleado
-                            </h6>
-
-                            <strong>
-                                {{ auth()->user()->employee_number ?? 'No asignado' }}
-                            </strong>
-                        </div>
-
-                        <div class="col-md-4">
-                            <h6 class="text-muted">
-                                Correo electrónico
-                            </h6>
-
-                            <strong>
-                                {{ auth()->user()->email }}
-                            </strong>
-                        </div>
-
-                        <div class="col-md-4">
-                            <h6 class="text-muted">
-                                País
-                            </h6>
-
-                            <strong>
-                                {{ auth()->user()->country ?? 'No asignado' }}
-                            </strong>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 @endsection

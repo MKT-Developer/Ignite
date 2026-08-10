@@ -43,6 +43,23 @@ $isPortalUser = auth()->check() && auth()->user()->hasRole('user');
                     </div>
 
                     <ul class="show-notification profile-notification dropdown-menu profile_mobile">
+                        <li class="mobile-language">
+                            <div class="language-switcher">
+
+                                <a href="{{ route('language.switch', 'es') }}"
+                                    class="{{ app()->getLocale() === 'es' ? 'active' : '' }}">
+                                    🇲🇽 Español
+                                </a>
+
+                                <a href="{{ route('language.switch', 'en') }}"
+                                    class="{{ app()->getLocale() === 'en' ? 'active' : '' }}">
+                                    🇺🇸 English
+                                </a>
+
+                            </div>
+
+                        </li>
+
                         @auth
                         <li>
                             <a href="{{ route('profile.edit') }}">
@@ -51,6 +68,7 @@ $isPortalUser = auth()->check() && auth()->user()->hasRole('user');
                             </a>
                         </li>
                         @endauth
+
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -100,6 +118,21 @@ $isPortalUser = auth()->check() && auth()->user()->hasRole('user');
                 </li>
             </ul>
             <ul class="nav-right">
+
+                <li>
+                    <div class="language-switcher">
+
+                        <a href="{{ route('language.switch', 'es') }}"
+                            class="{{ app()->getLocale() === 'es' ? 'active' : '' }}">
+                            🇲🇽 Español
+                        </a>
+
+                        <a href="{{ route('language.switch', 'en') }}"
+                            class="{{ app()->getLocale() === 'en' ? 'active' : '' }}">
+                            🇺🇸 English
+                        </a>
+                    </div>
+                </li>
 
                 <li class="user-profile header-notification">
 
@@ -184,6 +217,8 @@ $isPortalUser = auth()->check() && auth()->user()->hasRole('user');
                         </ul>
                     </div>
                 </li>
+
+
 
                 <!-- <li class="header-notification">
                     <div class="dropdown-primary dropdown">
