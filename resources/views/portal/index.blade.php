@@ -169,19 +169,14 @@
                     </div>
 
                     <ul>
-                        <li>
-                            Servicio de lavandería.
-                        </li>
-                        <li>
-                            Compras en tabaquería.
-                        </li>
-                        <li>
-                            Tour.
-                        </li>
-                        <li>
-                            Transportación.
-                        </li>
+                        <li>Servicio de lavandería.</li>
+                        <li>Compras en tabaquería.</li>
+                        <li>Tours.</li>
+                        <li>Transportación.</li>
+                        <li>Minibar.</li>
+                        <li>Servicio a cuartos.</li>
                     </ul>
+
                 </div>
 
                 {{-- INCLUIDO --}}
@@ -195,40 +190,18 @@
                     </div>
 
                     <ul>
-                        <li>
-                            Bebida de bienvenida y toalla fresca a la llegada.
-                        </li>
-                        <li>
-                            Desayuno, almuerzo y cena diarios, y refrigerios en hasta seis restaurantes del Resort de forma continua durante las horas de atención al público.
-                        </li>
-                        <li>
-                            Selección ilimitada de bebidas y cócteles especiales del Resort en bares y restaurantes seleccionados durante las horas de atención al público.
-                        </li>
-                        <li>
-                            Acceso al Kid's & Teen's Club y actividades.
-                        </li>
-                        <li>
-                            Dulces ilimitados disponibles en la heladería y el puesto de dulces durante las horas de atención al público.
-                        </li>
-                        <li>
-                            Acceso a la piscina familiar y de adultos, y al servicio de playa.
-                        </li>
-                        <li>
-                            Wifi estándar ilimitado en todo el Resort para todos los participantes del Grupo.
-                        </li>
-                        <li>
-                            Actividades diarias variadas del Resort y espectáculos nocturnos en vivo.
-                        </li>
-                        <li>
-                            Acceso al gimnasio y otras actividades wellness.
-                        </li>
-                        <li>
-                            Servicio a cuartos.
-                        </li>
-                        <li>
-                            Seguridad 24 horas.
-                        </li>
+                        <li>Bebida de bienvenida y toalla fresca a la llegada.</li>
+                        <li>Desayuno, almuerzo y cena diarios, y refrigerios en hasta seis restaurantes del Resort, de forma continua durante las horas de atención al público.</li>
+                        <li>Selección de bebidas y cócteles especiales del Resort en bares y restaurantes seleccionados, durante las horas de atención al público.</li>
+                        <li>Dulces ilimitados en la heladería y el puesto de dulces durante las horas de atención al público.</li>
+                        <li>Acceso a la piscina familiar, de adultos, y al servicio de playa en las horas permitidas del hotel.</li>
+                        <li>WiFi estándar ilimitado en todo el Resort para todos los participantes del grupo.</li>
+                        <li>Actividades diarias variadas del Resort y espectáculos nocturnos en vivo.</li>
+                        <li>Acceso al gimnasio y otras actividades de wellness.</li>
+                        <li>Seguridad las 24 horas.</li>
+                        <li>15% de descuento en tratamientos de masaje en el SPA Waldorf Astoria (no incluye manicura, tratamientos faciales, productos de SPA ni servicios de salón de belleza).</li>
                     </ul>
+
                 </div>
             </div>
         </div>
@@ -241,11 +214,11 @@
     <div class="portal-section-heading text-center">
 
         <h2 class="dresscode-header">
-            Proceso de Check-in
+           Información de llegada
         </h2>
 
         <p class="portal-section-label">
-            Información de llegada
+            Lunes 31 de Agosto
         </p>
 
     </div>
@@ -307,7 +280,7 @@
                     </h2>
 
                     <p>
-                        El código de vestimenta para las actividades del evento, podemos compartir los siguientes ejemplos:
+                        El código de vestimenta para las actividades del evento
                     </p>
                 </div>
             </div>
