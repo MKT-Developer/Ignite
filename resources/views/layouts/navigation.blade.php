@@ -3,7 +3,7 @@
         <div class="pcoded-inner-navbar main-menu">
             <!-- <div class="pcoded-navigation-label">Navigation</div> -->
             <ul class="pcoded-item pcoded-left-item">
-                <li class="pcoded-hasmenu {{ menuActive(['dashboard', 'users.*', 'permissions.*', 'roles.*', 'categories.*', 'courses.*']) }}">
+                <li class="pcoded-hasmenu {{ menuActive(['dashboard', 'users.*','portal', 'permissions.*', 'roles.*']) }}">
                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                         <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span>
                         <span class="pcoded-mtext">Panel de Administración</span>
@@ -14,7 +14,7 @@
                                 <span class="pcoded-mtext">Historial de Actividad</span>
                             </a>
                         </li> -->
-                        
+
                         <li class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
                             <a href="{{ route('dashboard') }}" class="waves-effect waves-dark">
                                 <span class="pcoded-micon"><i class="fas fa-tachometer-alt"></i></span>
@@ -26,6 +26,13 @@
                             <a href="{{ route('users.index') }}" class="waves-effect waves-dark">
                                 <span class="pcoded-micon"><i class="fas fa-users"></i></span>
                                 <span class="pcoded-mtext">Usuarios</span>
+                            </a>
+                        </li>
+
+                        <li class="{{ request()->routeIs('portal') ? 'active' : '' }}">
+                            <a href="{{ route('portal') }}" class="waves-effect waves-dark">
+                                <span class="pcoded-micon"><i class="fas fa-users"></i></span>
+                                <span class="pcoded-mtext">Portal</span>
                             </a>
                         </li>
 
