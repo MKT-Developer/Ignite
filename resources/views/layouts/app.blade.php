@@ -36,6 +36,17 @@
     <!-- Custom css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
     <!-- Scripts -->
+
+    <!-- Scripts -->
+    <script id="portal-translations" type="application/json">
+        @json([
+            'checkin' => __('portal.checkin'),
+            'eventSchedule' => __('portal.schedule'),
+        ])
+    </script>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
@@ -60,7 +71,7 @@ $isPortal = auth()->check() && auth()->user()->hasRole('user');
             @include('partials.header')
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                    
+
                     {{-- @if($showSidebar) --}}
                     @if(!$isPortal)
                     <!-- [ navigation menu ] start -->

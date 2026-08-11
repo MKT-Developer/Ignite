@@ -103,28 +103,6 @@ return [
         ],
     ],
 
-    'checkin' => [
-        'title' => 'Información de llegada',
-        'date' => 'Lunes 31 de Agosto',
-    ],
-
-    'schedule' => [
-
-        'label' => 'Agenda del evento',
-
-        'title' => 'Programa',
-
-        'description' =>
-        'Consulta las actividades programadas durante el evento, organizadas por día.',
-
-        'days' => [
-            'day1' => '31 AGO',
-            'day2' => '01 SEP',
-            'day3' => '02 SEP',
-            'day4' => '03 SEP',
-        ],
-    ],
-
     'dresscode' => [
 
         'title' => 'Código de vestimenta',
@@ -147,4 +125,118 @@ return [
         'view_examples' => 'Ver ejemplos',
     ],
 
+    'checkin' => [
+        'title' => 'Información de llegada',
+        'date' => 'Lunes 31 de Agosto',
+        'hosted_hilton_garden' => 'Hospedados en Hilton Garden Inn',
+        'direct_arrival' => 'Llegada directa a Hilton All-Inclusive',
+
+        'schedule' => 'Horario',
+        'activity' => 'Actividad',
+        'location' => 'Ubicación',
+
+        'breakfast' => 'Desayuno',
+        'board_transport' => 'Aborde al transporte',
+        'transport' => 'Transporte',
+        'check_in' => 'Check-in',
+    ],
+
+    'schedule' => [
+
+        'label' => 'Agenda del evento',
+
+        'title' => 'Programa',
+
+        'description' =>
+        'Consulta las actividades programadas durante el evento, organizadas por día.',
+
+        'days' => [
+            'day1' => '31 AGO',
+            'day2' => '01 SEP',
+            'day3' => '02 SEP',
+            'day4' => '03 SEP',
+        ],
+
+        'schedule' => 'Horario',
+        'activity' => 'Actividad',
+        'location' => 'Lugar',
+
+        'day1' => [
+            'title' => 'Lunes 31 de Agosto',
+            'subtitle' => 'Día 1',
+            'activities' => [
+                'registration' => 'Registro y entrega de gafetes',
+                'presidency_message' => 'Mensaje de Presidencia',
+                'operational_overview' => 'Overview operativo',
+                'administrative_overview' => 'Overview administrativo',
+                'buffet_lunch' => 'Comida buffet',
+                'support_center_panel' => 'Panel de Centro de Soporte',
+                'break_to_build' => 'Conferencia "Break to Build" · Rodrigo del Val',
+                'free_time' => 'Tiempo libre',
+                'dinner_by_restaurant' => 'Cena por restaurante',
+            ],
+            'locations' => [
+                'blue_room' => 'Salón Azul A',
+                'vela_restaurant' => 'Restaurante Vela',
+                'hotel_restaurants' => 'Restaurantes del hotel',
+                'none' => '—',
+            ],
+        ],
+
+        'day2' => [
+            'title' => 'Martes 1 de Septiembre',
+            'subtitle' => 'Día 2',
+            'activities' => [
+                'breakfast' => 'Desayuno',
+                'welcome_networking' => 'Bienvenida y actividad de networking',
+                'strategic_planning' => 'Taller: Planeación Estratégica · Rodrigo del Val',
+                'buffet_lunch' => 'Comida buffet',
+                'artificial_intelligence' => 'Taller: Inteligencia Artificial · Jesús Vargas',
+                'dinner_by_restaurant' => 'Cena por restaurante',
+            ],
+            'locations' => [
+                'hotel_restaurant' => 'Restaurante del hotel',
+                'blue_room' => 'Salón Azul A',
+                'vela_restaurant' => 'Restaurante Vela',
+                'hotel_restaurants' => 'Restaurantes del hotel',
+            ],
+        ],
+
+        'day3' => [
+            'title' => 'Miércoles 2 de Septiembre',
+            'subtitle' => 'Día 3 · Cena de Gala',
+            'activities' => [
+                'breakfast' => 'Desayuno',
+                'welcome_networking' => 'Bienvenida y actividad de networking',
+                'effective_operating_budget' => 'Taller: Presupuesto Operativo Efectivo · Fernando Rodríguez',
+                'buffet_lunch' => 'Comida buffet',
+                'suppliers_session' => 'Sesión de proveedores',
+                'best_practices' => 'Buenas prácticas · Gustavo Hernández',
+                'operational_best_practices' => 'Buenas prácticas de operación · Michael Taylor',
+                'event_closing' => 'Cierre del evento',
+                'get_ready' => 'Tiempo para arreglarte',
+                'gala_dinner' => 'Cena de Gala',
+            ],
+            'locations' => [
+                'hotel_restaurant' => 'Restaurante del hotel',
+                'blue_room' => 'Salón Azul A',
+                'vela_restaurant' => 'Restaurante Vela',
+                'rooms' => 'Habitaciones',
+                'dinner_room' => 'Salón de Cena',
+            ],
+        ],
+
+        'day4' => [
+            'title' => 'Jueves 3 de Septiembre',
+            'subtitle' => 'Salidas · Huéspedes del Hilton',
+            'activities' => [
+                'before_departure' => 'Antes de tu salida',
+                'checkout_luggage' => 'Check-out y resguardo de maletas',
+                'departure_airport' => 'Salida :number — Aeropuerto',
+            ],
+            'locations' => [
+                'lobby' => 'Lobby',
+            ],
+        ],
+    ],
 ];

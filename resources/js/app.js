@@ -79,47 +79,55 @@ $(".mobile-options").on('click', function () {
 
 });
 
+// ============================================
+// TRADUCCION DE CHECK-IN & PROGRAMA DEL EVENTO
+// ============================================
+const portalTranslations = JSON.parse(
+    document.getElementById('portal-translations').textContent
+);
+
 // ==============================
 // CHECK-IN
 // ==============================
+
 const checkInProcess = {
     process: [
         {
-            title: "Hospedados en Hilton Garden Inn",
+            title: portalTranslations.checkin.hosted_hilton_garden,
             steps: [
                 {
                     time: "7:00 - 7:40",
-                    activity: "Desayuno",
+                    activity: portalTranslations.checkin.breakfast,
                     location: "Hilton Garden Inn"
                 },
                 {
                     time: "7:50 - 8:00",
-                    activity: "Aborde al transporte",
+                    activity: portalTranslations.checkin.board_transport,
                     location: "Hilton Garden Inn"
                 },
                 {
                     time: "8:00 - 8:30",
-                    activity: "Transporte",
+                    activity: portalTranslations.checkin.transport,
                     location: "Hilton All-Inclusive"
                 },
                 {
                     time: "8:30 - 9:20",
-                    activity: "Check-in",
+                    activity: portalTranslations.checkin.check_in,
                     location: "Hilton All-Inclusive"
                 }
             ]
         },
         {
-            title: "Llegada directa a Hilton All-Inclusive",
+            title: portalTranslations.checkin.direct_arrival,
             steps: [
                 {
                     time: "7:30 - 8:00",
-                    activity: "Check-in",
+                    activity: portalTranslations.checkin.check_in,
                     location: "Hilton All-Inclusive"
                 },
                 {
                     time: "8:00 - 9:00",
-                    activity: "Desayuno",
+                    activity: portalTranslations.checkin.breakfast,
                     location: "Hilton All-Inclusive"
                 }
             ]
@@ -131,22 +139,32 @@ function renderCheckInProcess() {
     const container = document.getElementById('schedule-list');
     if (!container) return;
 
+    const t = portalTranslations.checkin;
+
     container.innerHTML = checkInProcess.process.map(process => `
         <div class="checkin-process">
             <div class="checkin-process-title">${process.title}</div>
 
             <div class="checkin-table">
                 <div class="checkin-header">
-                    <div>Horario</div>
-                    <div>Actividad</div>
-                    <div>Ubicación</div>
+                    <div>${t.schedule}</div>
+                    <div>${t.activity}</div>
+                    <div>${t.location}</div>
                 </div>
 
                 ${process.steps.map(step => `
                     <div class="checkin-row">
-                        <div class="checkin-time" data-label="Horario">${step.time}</div>
-                        <div class="checkin-activity" data-label="Actividad">${step.activity}</div>
-                        <div class="checkin-location" data-label="Ubicación">${step.location}</div>
+                        <div class="checkin-time" data-label="${t.schedule}">
+                            ${step.time}
+                        </div>
+
+                        <div class="checkin-activity" data-label="${t.activity}">
+                            ${step.activity}
+                        </div>
+
+                        <div class="checkin-location" data-label="${t.location}">
+                            ${step.location}
+                        </div>
                     </div>
                 `).join('')}
             </div>
@@ -154,69 +172,201 @@ function renderCheckInProcess() {
     `).join('');
 }
 
+
 // ==============================
 // PROGRAMA DEL EVENTO
 // ==============================
+
 const eventSchedule = {
     day1: {
-        title: "Lunes 31 de Agosto",
-        subtitle: "Día 1",
+        title: portalTranslations.eventSchedule.day1.title,
+        subtitle: portalTranslations.eventSchedule.day1.subtitle,
+
         activities: [
-            { time: "09:00 – 10:00", activity: "Registro y entrega de gafetes", location: "Salón Azul A" },
-            { time: "10:00 – 11:00", activity: "Mensaje de Presidencia", location: "Salón Azul A" },
-            { time: "11:00 – 12:00", activity: "Overview operativo", location: "Salón Azul A" },
-            { time: "12:00 – 13:00", activity: "Overview administrativo", location: "Salón Azul A" },
-            { time: "13:00 – 15:00", activity: "Comida buffet", location: "Restaurante Vela" },
-            { time: "15:00 – 17:00", activity: "Panel de Centro de Soporte", location: "Salón Azul A" },
-            { time: "17:00 – 18:00", activity: 'Conferencia "Break to Build" · Rodrigo del Val', location: "Salón Azul A" },
-            { time: "18:00 – 19:00", activity: "Tiempo libre", location: "—" },
-            { time: "20:00", activity: "Cena por restaurante", location: "Restaurantes del hotel" }
+            {
+                time: "09:00 – 10:00",
+                activity: portalTranslations.eventSchedule.day1.activities.registration,
+                location: portalTranslations.eventSchedule.day1.locations.blue_room
+            },
+            {
+                time: "10:00 – 11:00",
+                activity: portalTranslations.eventSchedule.day1.activities.presidency_message,
+                location: portalTranslations.eventSchedule.day1.locations.blue_room
+            },
+            {
+                time: "11:00 – 12:00",
+                activity: portalTranslations.eventSchedule.day1.activities.operational_overview,
+                location: portalTranslations.eventSchedule.day1.locations.blue_room
+            },
+            {
+                time: "12:00 – 13:00",
+                activity: portalTranslations.eventSchedule.day1.activities.administrative_overview,
+                location: portalTranslations.eventSchedule.day1.locations.blue_room
+            },
+            {
+                time: "13:00 – 15:00",
+                activity: portalTranslations.eventSchedule.day1.activities.buffet_lunch,
+                location: portalTranslations.eventSchedule.day1.locations.vela_restaurant
+            },
+            {
+                time: "15:00 – 17:00",
+                activity: portalTranslations.eventSchedule.day1.activities.support_center_panel,
+                location: portalTranslations.eventSchedule.day1.locations.blue_room
+            },
+            {
+                time: "17:00 – 18:00",
+                activity: portalTranslations.eventSchedule.day1.activities.break_to_build,
+                location: portalTranslations.eventSchedule.day1.locations.blue_room
+            },
+            {
+                time: "18:00 – 19:00",
+                activity: portalTranslations.eventSchedule.day1.activities.free_time,
+                location: portalTranslations.eventSchedule.day1.locations.none
+            },
+            {
+                time: "20:00",
+                activity: portalTranslations.eventSchedule.day1.activities.dinner_by_restaurant,
+                location: portalTranslations.eventSchedule.day1.locations.hotel_restaurants
+            }
         ]
     },
 
     day2: {
-        title: "Martes 1 de Septiembre",
-        subtitle: "Día 2",
+        title: portalTranslations.eventSchedule.day2.title,
+        subtitle: portalTranslations.eventSchedule.day2.subtitle,
+
         activities: [
-            { time: "07:30 – 08:50", activity: "Desayuno", location: "Restaurante del hotel" },
-            { time: "09:00 – 10:00", activity: "Bienvenida y actividad de networking", location: "Salón Azul A" },
-            { time: "10:00 – 14:00", activity: "Taller: Planeación Estratégica · Rodrigo del Val", location: "Salón Azul A" },
-            { time: "14:00 – 15:00", activity: "Comida buffet", location: "Restaurante Vela" },
-            { time: "15:00 – 19:00", activity: "Taller: Inteligencia Artificial · Jesús Vargas", location: "Salón Azul A" },
-            { time: "20:00", activity: "Cena por restaurante", location: "Restaurantes del hotel" }
+            {
+                time: "07:30 – 08:50",
+                activity: portalTranslations.eventSchedule.day2.activities.breakfast,
+                location: portalTranslations.eventSchedule.day2.locations.hotel_restaurant
+            },
+            {
+                time: "09:00 – 10:00",
+                activity: portalTranslations.eventSchedule.day2.activities.welcome_networking,
+                location: portalTranslations.eventSchedule.day2.locations.blue_room
+            },
+            {
+                time: "10:00 – 14:00",
+                activity: portalTranslations.eventSchedule.day2.activities.strategic_planning,
+                location: portalTranslations.eventSchedule.day2.locations.blue_room
+            },
+            {
+                time: "14:00 – 15:00",
+                activity: portalTranslations.eventSchedule.day2.activities.buffet_lunch,
+                location: portalTranslations.eventSchedule.day2.locations.vela_restaurant
+            },
+            {
+                time: "15:00 – 19:00",
+                activity: portalTranslations.eventSchedule.day2.activities.artificial_intelligence,
+                location: portalTranslations.eventSchedule.day2.locations.blue_room
+            },
+            {
+                time: "20:00",
+                activity: portalTranslations.eventSchedule.day2.activities.dinner_by_restaurant,
+                location: portalTranslations.eventSchedule.day2.locations.hotel_restaurants
+            }
         ]
     },
 
     day3: {
-        title: "Miércoles 2 de Septiembre",
-        subtitle: "Día 3 · Cena de Gala",
+        title: portalTranslations.eventSchedule.day3.title,
+        subtitle: portalTranslations.eventSchedule.day3.subtitle,
+
         activities: [
-            { time: "07:30 – 08:50", activity: "Desayuno", location: "Restaurante del hotel" },
-            { time: "09:00 – 10:00", activity: "Bienvenida y actividad de networking", location: "Salón Azul A" },
-            { time: "10:00 – 14:00", activity: "Taller: Presupuesto Operativo Efectivo · Fernando Rodríguez", location: "Salón Azul A" },
-            { time: "14:00 – 15:00", activity: "Comida buffet", location: "Restaurante Vela" },
-            { time: "15:00 – 16:00", activity: "Sesión de proveedores", location: "Salón Azul A" },
-            { time: "16:00 – 17:00", activity: "Buenas prácticas · Gustavo Hernández", location: "Salón Azul A" },
-            { time: "17:00 – 18:00", activity: "Buenas prácticas de operación · Michael Taylor", location: "Salón Azul A" },
-            { time: "18:00 – 18:20", activity: "Cierre del evento", location: "Salón Azul A" },
-            { time: "18:20 – 20:00", activity: "Tiempo para arreglarte", location: "Habitaciones" },
-            { time: "20:00 – 00:00", activity: "Cena de Gala", location: "Salón de Cena" }
+            {
+                time: "07:30 – 08:50",
+                activity: portalTranslations.eventSchedule.day3.activities.breakfast,
+                location: portalTranslations.eventSchedule.day3.locations.hotel_restaurant
+            },
+            {
+                time: "09:00 – 10:00",
+                activity: portalTranslations.eventSchedule.day3.activities.welcome_networking,
+                location: portalTranslations.eventSchedule.day3.locations.blue_room
+            },
+            {
+                time: "10:00 – 14:00",
+                activity: portalTranslations.eventSchedule.day3.activities.effective_operating_budget,
+                location: portalTranslations.eventSchedule.day3.locations.blue_room
+            },
+            {
+                time: "14:00 – 15:00",
+                activity: portalTranslations.eventSchedule.day3.activities.buffet_lunch,
+                location: portalTranslations.eventSchedule.day3.locations.vela_restaurant
+            },
+            {
+                time: "15:00 – 16:00",
+                activity: portalTranslations.eventSchedule.day3.activities.suppliers_session,
+                location: portalTranslations.eventSchedule.day3.locations.blue_room
+            },
+            {
+                time: "16:00 – 17:00",
+                activity: portalTranslations.eventSchedule.day3.activities.best_practices,
+                location: portalTranslations.eventSchedule.day3.locations.blue_room
+            },
+            {
+                time: "17:00 – 18:00",
+                activity: portalTranslations.eventSchedule.day3.activities.operational_best_practices,
+                location: portalTranslations.eventSchedule.day3.locations.blue_room
+            },
+            {
+                time: "18:00 – 18:20",
+                activity: portalTranslations.eventSchedule.day3.activities.event_closing,
+                location: portalTranslations.eventSchedule.day3.locations.blue_room
+            },
+            {
+                time: "18:20 – 20:00",
+                activity: portalTranslations.eventSchedule.day3.activities.get_ready,
+                location: portalTranslations.eventSchedule.day3.locations.rooms
+            },
+            {
+                time: "20:00 – 00:00",
+                activity: portalTranslations.eventSchedule.day3.activities.gala_dinner,
+                location: portalTranslations.eventSchedule.day3.locations.dinner_room
+            }
         ]
     },
 
     day4: {
-        title: "Jueves 3 de Septiembre",
-        subtitle: "Salidas · Huéspedes del Hilton",
+        title: portalTranslations.eventSchedule.day4.title,
+        subtitle: portalTranslations.eventSchedule.day4.subtitle,
+
         activities: [
-            { time: "Antes de tu salida", activity: "Check-out y resguardo de maletas", location: "Lobby" },
-            { time: "03:00", activity: "Salida 1 — Aeropuerto", location: "Lobby" },
-            { time: "05:30", activity: "Salida 2 — Aeropuerto", location: "Lobby" },
-            { time: "07:30", activity: "Salida 3 — Aeropuerto", location: "Lobby" },
-            { time: "09:00", activity: "Salida 4 — Aeropuerto", location: "Lobby" },
-            { time: "11:00", activity: "Salida 5 — Aeropuerto", location: "Lobby" }
+            {
+                // time: "Antes de tu salida",
+                time: portalTranslations.eventSchedule.day4.activities.before_departure,
+                activity: portalTranslations.eventSchedule.day4.activities.checkout_luggage,
+                location: portalTranslations.eventSchedule.day4.locations.lobby
+            },
+            {
+                time: "03:00",
+                activity: portalTranslations.eventSchedule.day4.activities.departure_airport.replace(':number', '1'),
+                location: portalTranslations.eventSchedule.day4.locations.lobby
+            },
+            {
+                time: "05:30",
+                activity: portalTranslations.eventSchedule.day4.activities.departure_airport.replace(':number', '2'),
+                location: portalTranslations.eventSchedule.day4.locations.lobby
+            },
+            {
+                time: "07:30",
+                activity: portalTranslations.eventSchedule.day4.activities.departure_airport.replace(':number', '3'),
+                location: portalTranslations.eventSchedule.day4.locations.lobby
+            },
+            {
+                time: "09:00",
+                activity: portalTranslations.eventSchedule.day4.activities.departure_airport.replace(':number', '4'),
+                location: portalTranslations.eventSchedule.day4.locations.lobby
+            },
+            {
+                time: "11:00",
+                activity: portalTranslations.eventSchedule.day4.activities.departure_airport.replace(':number', '5'),
+                location: portalTranslations.eventSchedule.day4.locations.lobby
+            }
         ]
     }
 };
+
 
 function renderEventSchedule(day) {
     const container = document.getElementById('event-schedule-list');
@@ -224,6 +374,8 @@ function renderEventSchedule(day) {
 
     const currentDay = eventSchedule[day];
     if (!currentDay) return;
+
+    const t = portalTranslations.eventSchedule;
 
     container.innerHTML = `
         <div class="schedule-day">
@@ -234,22 +386,31 @@ function renderEventSchedule(day) {
 
             <div class="event-table">
                 <div class="event-header">
-                    <div>Horario</div>
-                    <div>Actividad</div>
-                    <div>Lugar</div>
+                    <div>${t.schedule}</div>
+                    <div>${t.activity}</div>
+                    <div>${t.location}</div>
                 </div>
 
                 ${currentDay.activities.map(item => `
                     <div class="event-row">
-                        <div class="event-time" data-label="Horario">${item.time}</div>
-                        <div class="event-activity" data-label="Actividad">${item.activity}</div>
-                        <div class="event-location" data-label="Lugar">${item.location}</div>
+                        <div class="event-time" data-label="${t.schedule}">
+                            ${item.time}
+                        </div>
+
+                        <div class="event-activity" data-label="${t.activity}">
+                            ${item.activity}
+                        </div>
+
+                        <div class="event-location" data-label="${t.location}">
+                            ${item.location}
+                        </div>
                     </div>
                 `).join('')}
             </div>
         </div>
     `;
 }
+
 
 function initEventScheduleNav() {
     const buttons = document.querySelectorAll('.schedule-nav button');
@@ -259,6 +420,7 @@ function initEventScheduleNav() {
         button.addEventListener('click', () => {
             buttons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
+
             renderEventSchedule(button.dataset.day);
         });
     });
