@@ -86,6 +86,7 @@ const portalTranslations = JSON.parse(
     document.getElementById('portal-translations').textContent
 );
 
+
 // ==============================
 // CHECK-IN
 // ==============================
