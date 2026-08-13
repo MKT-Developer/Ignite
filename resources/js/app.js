@@ -301,15 +301,20 @@ const eventSchedule = {
                 location: portalTranslations.eventSchedule.day3.locations.blue_room
             },
             {
-                time: "16:00 – 17:00",
+                time: "16:00 – 18:00",
                 activity: portalTranslations.eventSchedule.day3.activities.best_practices,
                 location: portalTranslations.eventSchedule.day3.locations.blue_room
             },
-            {
-                time: "17:00 – 18:00",
-                activity: portalTranslations.eventSchedule.day3.activities.operational_best_practices,
-                location: portalTranslations.eventSchedule.day3.locations.blue_room
-            },
+            // {
+            //     time: "16:00 – 17:00",
+            //     activity: portalTranslations.eventSchedule.day3.activities.best_practices,
+            //     location: portalTranslations.eventSchedule.day3.locations.blue_room
+            // },
+            // {
+            //     time: "17:00 – 18:00",
+            //     activity: portalTranslations.eventSchedule.day3.activities.operational_best_practices,
+            //     location: portalTranslations.eventSchedule.day3.locations.blue_room
+            // },
             {
                 time: "18:00 – 18:20",
                 activity: portalTranslations.eventSchedule.day3.activities.event_closing,
