@@ -443,3 +443,223 @@ document.addEventListener('DOMContentLoaded', () => {
         initEventScheduleNav();
     }
 });
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwpjlw7_zFmJ1i-4qrRb8ifn-bksVlCpM-6V7yRjvBZ6uoFQIsjK8W2KZjvaCAiZHCjDA/exec";
+
+const form = document.getElementById('menuForm');
+const submitBtn = document.getElementById('submitBtn');
+const errorMsg = document.getElementById('errorMsg');
+const ticket = document.getElementById('ticket');
+const nameInput = document.getElementById('fullName');
+
+
+/**
+ * Textos provenientes de Laravel / portal.php
+ */
+const submitText = submitBtn.dataset.defaultText;
+const savingText = submitBtn.dataset.savingText;
+const saveErrorText = errorMsg.dataset.saveError;
+
+
+/**
+ * Valida el formulario
+ */
+function checkValid() {
+
+    const name = nameInput.value.trim();
+
+    const entrada = form.querySelector(
+        'input[name="entrada"]:checked'
+    );
+
+    const plato = form.querySelector(
+        'input[name="platoFuerte"]:checked'
+    );
+
+    const postre = form.querySelector(
+        'input[name="postre"]:checked'
+    );
+
+    const valid =
+        name.length > 2 &&
+        entrada &&
+        plato &&
+        postre;
+
+    submitBtn.disabled = !valid;
+
+    return valid;
+}
+
+
+/**
+ * Oculta el mensaje de error
+ * y vuelve a validar
+ */
+form.addEventListener('input', () => {
+
+    errorMsg.style.display = 'none';
+
+    checkValid();
+
+});
+
+
+/**
+ * Envío del formulario
+ */
+form.addEventListener('submit', async (e) => {
+
+    e.preventDefault();
+
+    if (!checkValid()) {
+
+        errorMsg.style.display = 'block';
+
+        return;
+    }
+
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = savingText;
+
+
+    const name = nameInput.value.trim();
+
+    const entrada = form.querySelector(
+        'input[name="entrada"]:checked'
+    ).value;
+
+    const plato = form.querySelector(
+        'input[name="platoFuerte"]:checked'
+    ).value;
+
+    const postre = form.querySelector(
+        'input[name="postre"]:checked'
+    ).value;
+
+    const allergy = document
+        .getElementById('allergyNote')
+        .value
+        .trim();
+
+
+    /**
+     * Registro que será enviado
+     * directamente a Google Apps Script.
+     */
+    const record = {
+
+        name: name,
+
+        entrada: entrada,
+
+        plato: plato,
+
+        postre: postre,
+
+        allergy: allergy,
+
+        timestamp: new Date().toISOString()
+
+    };
+
+
+    try {
+
+        await fetch(SCRIPT_URL, {
+
+            method: 'POST',
+
+            headers: {
+                'Content-Type': 'text/plain;charset=utf-8'
+            },
+
+            body: JSON.stringify(record)
+
+        });
+
+    } catch (err) {
+
+        console.error(
+            'Error guardando la selección',
+            err
+        );
+
+        errorMsg.textContent = saveErrorText;
+
+        errorMsg.style.display = 'block';
+
+        submitBtn.disabled = false;
+
+        submitBtn.textContent = submitText;
+
+        return;
+    }
+
+
+    /**
+     * Mostrar confirmación
+     */
+    document.getElementById('t-name').textContent = name;
+
+    document.getElementById('t-entrada').textContent = entrada;
+
+    document.getElementById('t-plato').textContent = plato;
+
+    document.getElementById('t-postre').textContent = postre;
+
+
+    /**
+     * Alergia
+     */
+    if (allergy) {
+
+        document.getElementById('t-allergy').textContent = allergy;
+
+        document.getElementById(
+            't-allergy-row'
+        ).style.display = 'flex';
+
+    } else {
+
+        document.getElementById(
+            't-allergy-row'
+        ).style.display = 'none';
+
+    }
+
+
+    /**
+     * Ocultar formulario
+     * y mostrar ticket.
+     */
+    form.style.display = 'none';
+
+    ticket.classList.add('show');
+
+    submitBtn.textContent = submitText;
+
+});
+
+
+/**
+ * Editar selección
+ */
+document
+    .getElementById('editLink')
+    .addEventListener('click', () => {
+
+        ticket.classList.remove('show');
+
+        form.style.display = 'block';
+
+        checkValid();
+
+    });
+
+
+/**
+ * Validación inicial
+ */
+checkValid();

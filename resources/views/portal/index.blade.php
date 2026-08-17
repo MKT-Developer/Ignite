@@ -155,7 +155,6 @@
 </section>
 <!-- SEDE -->
 
-
 {{-- SECCIÓN INCLUYE TU REGISTRO --}}
 <section class="include-header-bg">
     <div class="portal-location-overlay">
@@ -178,7 +177,6 @@
 
     </div>
 </section>
-
 
 <section class="include-content-bg">
 
@@ -299,7 +297,6 @@
 
 </section>
 
-
 <!-- CHECK-IN -->
 <section class="portal-checkin" id="registro">
 
@@ -319,7 +316,6 @@
 
 </section>
 <!-- CHECK-IN -->
-
 
 <!-- PROGRAMA DEL EVENTO -->
 <section class="portal-schedule" id="programa">
@@ -369,7 +365,6 @@
 </section>
 <!-- PROGRAMA DEL EVENTO -->
 
-
 {{-- CÓDIGO DE VESTIMENTA --}}
 <section class="dresscode-header-bg">
 
@@ -399,7 +394,6 @@
 
 </section>
 
-
 <section>
 
     <div class="container">
@@ -427,25 +421,26 @@
             </div>
 
             <div class="dresscode-image">
-
-                <img
+                <!-- <img
                     src="{{ asset('../images/portal/referencia-mujer.webp') }}"
+                    alt="{{ __('portal.dresscode.ladies.image_alt') }}"> -->
+
+                    <img
+                    src="{{ asset('../images/portal/Referencia mujer_.png') }}"
                     alt="{{ __('portal.dresscode.ladies.image_alt') }}">
-
             </div>
-
         </div>
-
 
         {{-- CABALLEROS --}}
         <div class="dresscode-card">
-
             <div class="dresscode-image">
-
-                <img
+                <!-- <img
                     src="{{ asset('../images/portal/referencia-hombre.webp') }}"
-                    alt="{{ __('portal.dresscode.men.image_alt') }}">
+                    alt="{{ __('portal.dresscode.men.image_alt') }}"> -->
 
+                    <img
+                    src="{{ asset('../images/portal/Referencia hombre_.png') }}"
+                    alt="{{ __('portal.dresscode.ladies.image_alt') }}">
             </div>
 
             <div class="dresscode-info">
@@ -470,6 +465,44 @@
         </div>
 
     </div>
+
+</section>
+
+{{-- CENA DE GALA --}}
+<!-- <section class="dresscode-header-bg">
+
+    <div class="portal-location-overlay">
+
+        <div class="dresscode-section">
+
+            <div class="container">
+
+                <div class="dresscode-header text-center">
+
+                    <h2>
+                        {{ __('portal.dresscode.title') }}
+                    </h2>
+
+                    <p>
+                        {{ __('portal.dresscode.description') }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section> -->
+
+<section clas="dress_code">
+
+    <img src="../images/portal/dress_code.png" alt="">
+
+    <!-- <div class="container">
+    </div> -->
 
 </section>
 

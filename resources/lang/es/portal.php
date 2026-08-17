@@ -212,7 +212,7 @@ return [
                 'buffet_lunch' => 'Comida buffet',
                 'suppliers_session' => 'Sesión de proveedores',
                 'best_practices' => 'Panel de buenas practicas operativas por directores',
-                'operational_best_practices' => 'Panel de buenas practicas operativas por directores',
+                // 'operational_best_practices' => 'Panel de buenas practicas operativas por directores',
                 // 'best_practices' => 'Buenas prácticas · Gustavo Hernández',
                 // 'operational_best_practices' => 'Buenas prácticas de operación · Michael Taylor',
                 'event_closing' => 'Cierre del evento',
@@ -240,5 +240,125 @@ return [
                 'lobby' => 'Lobby',
             ],
         ],
+    ],
+
+    'gala' => [
+
+        'title' => 'Cena de Gala · 35 Aniversario MERA',
+
+        'hero' => [
+            'title_line_1' => 'Cena de Gala',
+            'title_line_2' => '35 Aniversario MERA',
+
+            'description' => 'Antes de la noche, cuéntanos qué elegirás de nuestro menú preparado especialmente para la ocasión.',
+        ],
+
+        'form' => [
+
+            'full_name' => [
+                'label' => 'Nombre completo',
+                'placeholder' => 'Como aparecerás en tu lugar en mesa',
+            ],
+
+            'allergy' => [
+                'label' => 'Alergia que represente una alarma (opcional)',
+                'placeholder' => 'Ej. alergia a mariscos, frutos secos, gluten severo...',
+                'note' => 'Este campo es para alergias que puedan poner en riesgo tu salud.',
+            ],
+
+            'submit' => 'Confirmar mi selección',
+
+            'error' => 'Completa tu nombre y una opción de cada tiempo antes de continuar.',
+
+            'hint' => 'Tu selección quedará registrada para el equipo organizador.',
+        ],
+
+        'menu' => [
+
+            'starter' => [
+
+                'title' => 'Entrada',
+
+                'options' => [
+
+                    'ceviche' => 'Ceviche de atún fresco marinado en leche de tigre y maíz tatemado',
+
+                    'bisque' => 'Bisque de langosta con esencia de pernod y aceite de perejil',
+
+                ],
+            ],
+
+            'main_course' => [
+
+                'title' => 'Plato fuerte',
+
+                'options' => [
+
+                    'beef' => 'Filete de res a la plancha, puré de patatas al ajo y romero, verduras de temporada en salsa de vino tinto',
+
+                    'snapper' => 'Suprema de pargo en hoja de maíz al pastor, arroz salvaje y verduras de la estación',
+
+                ],
+            ],
+
+            'dessert' => [
+
+                'title' => 'Postre',
+
+                'options' => [
+
+                    'cheesecake' => 'Tarta New York de queso con salsa de frutas',
+
+                    'mousse' => 'Mousse de chocolate blanco y oscuro',
+
+                ],
+            ],
+        ],
+
+        'confirmation' => [
+
+            'title' => 'Selección confirmada',
+
+            'description' => 'Te esperamos en la Cena de Gala del 35 Aniversario',
+
+            'name' => 'Nombre',
+
+            'starter' => 'Entrada',
+
+            'main_course' => 'Plato fuerte',
+
+            'dessert' => 'Postre',
+
+            'allergy' => 'Alergia',
+
+            'edit' => 'Editar mi selección',
+        ],
+
+        'admin_link' => 'Panel del equipo organizador',
+
+        'form' => [
+
+            'full_name' => [
+                'label' => 'Nombre completo',
+                'placeholder' => 'Como aparecerás en tu lugar en mesa',
+            ],
+
+            'allergy' => [
+                'label' => 'Alergia que represente una alarma (opcional)',
+                'placeholder' => 'Ej. alergia a mariscos, frutos secos, gluten severo...',
+                'note' => 'Este campo es para alergias que puedan poner en riesgo tu salud.',
+            ],
+
+            'submit' => 'Confirmar mi selección',
+
+            'saving' => 'Guardando...',
+
+            'error' => 'Completa tu nombre y una opción de cada tiempo antes de continuar.',
+
+            'save_error' => 'No pudimos guardar tu selección. Intenta de nuevo.',
+
+            'hint' => 'Tu selección quedará registrada para el equipo organizador.',
+        ],
+
     ],
 ];

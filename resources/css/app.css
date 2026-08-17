@@ -2914,3 +2914,8 @@ ACCESIBILIDAD
 }
 
 /* LENGUAJE */
+
+.dress_code {
+    display: flex;
+    justify-content: center;
+}

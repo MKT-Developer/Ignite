@@ -212,7 +212,7 @@ return [
                 'buffet_lunch' => 'Buffet Lunch',
                 'suppliers_session' => 'Supplier Session',
                 'best_practices' => 'Panel on operational best practices for directors',
-                'operational_best_practices' => 'Panel on operational best practices for directors',
+                // 'operational_best_practices' => 'Panel on operational best practices for directors',
                 // 'best_practices' => 'Best Practices · Gustavo Hernández',
                 // 'operational_best_practices' => 'Operational Best Practices · Michael Taylor',
                 'event_closing' => 'Event Closing',
@@ -239,6 +239,126 @@ return [
             'locations' => [
                 'lobby' => 'Lobby',
             ],
+        ],
+
+    ],
+
+    'gala' => [
+
+        'title' => 'Gala Dinner · MERA 35th Anniversary',
+
+        'hero' => [
+            'title_line_1' => 'Gala Dinner',
+            'title_line_2' => 'MERA 35th Anniversary',
+
+            'description' => 'Before the evening begins, tell us which options you would like to enjoy from our menu specially prepared for the occasion.',
+        ],
+
+        'form' => [
+
+            'full_name' => [
+                'label' => 'Full name',
+                'placeholder' => 'As it will appear at your place at the table',
+            ],
+
+            'allergy' => [
+                'label' => 'Allergy that may represent a health risk (optional)',
+                'placeholder' => 'E.g. shellfish, nuts, severe gluten allergy...',
+                'note' => 'This field is for allergies that could put your health at risk.',
+            ],
+
+            'submit' => 'Confirm my selection',
+
+            'error' => 'Please complete your name and select one option from each course before continuing.',
+
+            'hint' => 'Your selection will be recorded for the organizing team.',
+        ],
+
+        'menu' => [
+
+            'starter' => [
+
+                'title' => 'Starter',
+
+                'options' => [
+
+                    'ceviche' => 'Fresh tuna ceviche marinated in tiger milk with charred corn',
+
+                    'bisque' => 'Lobster bisque with Pernod essence and parsley oil',
+
+                ],
+            ],
+
+            'main_course' => [
+
+                'title' => 'Main course',
+
+                'options' => [
+
+                    'beef' => 'Grilled beef tenderloin, garlic and rosemary mashed potatoes, seasonal vegetables in red wine sauce',
+
+                    'snapper' => 'Snapper fillet in pastor-style corn leaf, wild rice and seasonal vegetables',
+
+                ],
+            ],
+
+            'dessert' => [
+
+                'title' => 'Dessert',
+
+                'options' => [
+
+                    'cheesecake' => 'New York cheesecake with fruit sauce',
+
+                    'mousse' => 'White and dark chocolate mousse',
+
+                ],
+            ],
+        ],
+
+        'confirmation' => [
+
+            'title' => 'Selection confirmed',
+
+            'description' => 'We look forward to seeing you at the 35th Anniversary Gala Dinner',
+
+            'name' => 'Name',
+
+            'starter' => 'Starter',
+
+            'main_course' => 'Main course',
+
+            'dessert' => 'Dessert',
+
+            'allergy' => 'Allergy',
+
+            'edit' => 'Edit my selection',
+        ],
+
+        'admin_link' => 'Organizing team panel',
+
+        'form' => [
+
+            'full_name' => [
+                'label' => 'Full name',
+                'placeholder' => 'As it will appear at your place at the table',
+            ],
+
+            'allergy' => [
+                'label' => 'Allergy that may represent a health risk (optional)',
+                'placeholder' => 'E.g. shellfish, nuts, severe gluten allergy...',
+                'note' => 'This field is for allergies that could put your health at risk.',
+            ],
+
+            'submit' => 'Confirm my selection',
+
+            'saving' => 'Saving...',
+
+            'error' => 'Please complete your name and select one option from each course before continuing.',
+
+            'save_error' => 'We could not save your selection. Please try again.',
+
+            'hint' => 'Your selection will be recorded for the organizing team.',
         ],
 
     ],

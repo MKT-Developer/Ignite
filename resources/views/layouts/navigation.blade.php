@@ -3,7 +3,7 @@
         <div class="pcoded-inner-navbar main-menu">
             <!-- <div class="pcoded-navigation-label">Navigation</div> -->
             <ul class="pcoded-item pcoded-left-item">
-                <li class="pcoded-hasmenu {{ menuActive(['dashboard', 'users.*','portal', 'permissions.*', 'roles.*']) }}">
+                <li class="pcoded-hasmenu {{ menuActive(['dashboard', 'users.*','portal', 'permissions.*', 'roles.*', 'encuesta']) }}">
                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                         <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span>
                         <span class="pcoded-mtext">Panel de Administración</span>
@@ -31,8 +31,21 @@
 
                         <li class="{{ request()->routeIs('portal') ? 'active' : '' }}">
                             <a href="{{ route('portal') }}" class="waves-effect waves-dark">
-                                <span class="pcoded-micon"><i class="fas fa-users"></i></span>
+                                <span class="pcoded-micon">
+                                    <i class="fas fa-th-large"></i>
+                                </span>
+
                                 <span class="pcoded-mtext">Portal</span>
+                            </a>
+                        </li>
+
+                        <li class="{{ request()->routeIs('encuesta') ? 'active' : '' }}">
+                            <a href="{{ route('encuesta') }}" class="waves-effect waves-dark">
+                                <span class="pcoded-micon">
+                                    <i class="fas fa-list-alt"></i>
+                                </span>
+
+                                <span class="pcoded-mtext">Encuesta</span>
                             </a>
                         </li>
 

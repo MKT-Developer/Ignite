@@ -49,6 +49,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/portal', function () {
         return view('portal.index');
     })->name('portal');
+
+    Route::get('/encuesta', function () {
+        return view('encuesta.index');
+    })->name('encuesta');
 });
 require __DIR__ . '/auth.php';
 
