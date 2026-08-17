@@ -48,7 +48,6 @@
 </section>
 <!-- BANNER -->
 
-
 <!-- GRID -->
 <section class="portal-gallery">
 
@@ -83,6 +82,100 @@
 </section>
 <!-- GRID -->
 
+{{-- =========================================================
+     CONTADOR
+========================================================== --}}
+<section class="gala-countdown">
+
+    <div class="gala-countdown-label">
+        {{ __('portal.gala.countdown.label') }}
+    </div>
+
+    <p class="gala-countdown-note">
+        {{ __('portal.gala.countdown.note') }}
+    </p>
+
+    <div
+        class="gala-countdown-grid"
+        id="galaCountdown"
+        data-target="2026-08-31T23:59:59-05:00">
+
+        <div class="gala-countdown-item">
+
+            <span
+                class="gala-countdown-number"
+                id="countdown-days">
+                00
+            </span>
+
+            <span class="gala-countdown-unit">
+                {{ __('portal.gala.countdown.days') }}
+            </span>
+
+        </div>
+
+
+        <div class="gala-countdown-separator">
+            :
+        </div>
+
+
+        <div class="gala-countdown-item">
+
+            <span
+                class="gala-countdown-number"
+                id="countdown-hours">
+                00
+            </span>
+
+            <span class="gala-countdown-unit">
+                {{ __('portal.gala.countdown.hours') }}
+            </span>
+
+        </div>
+
+
+        <div class="gala-countdown-separator">
+            :
+        </div>
+
+
+        <div class="gala-countdown-item">
+
+            <span
+                class="gala-countdown-number"
+                id="countdown-minutes">
+                00
+            </span>
+
+            <span class="gala-countdown-unit">
+                {{ __('portal.gala.countdown.minutes') }}
+            </span>
+
+        </div>
+
+
+        <div class="gala-countdown-separator">
+            :
+        </div>
+
+
+        <div class="gala-countdown-item">
+
+            <span
+                class="gala-countdown-number"
+                id="countdown-seconds">
+                00
+            </span>
+
+            <span class="gala-countdown-unit">
+                {{ __('portal.gala.countdown.seconds') }}
+            </span>
+
+        </div>
+
+    </div>
+</section>
 
 <!-- SEDE -->
 <section class="portal-location-header">
@@ -296,6 +389,7 @@
     </div>
 
 </section>
+{{-- SECCIÓN INCLUYE TU REGISTRO --}}
 
 <!-- CHECK-IN -->
 <section class="portal-checkin" id="registro">
@@ -499,10 +593,47 @@
 
 <section class="dress_code">
 
-    <img src="../images/portal/dress_code.png" alt="">
+    <img src="../images/portal/dress_code.png" alt="">    
 
-    <!-- <div class="container">
-    </div> -->
+</section>
+
+<section class="testimonio-header-bg">
+
+    <div class="portal-location-overlay">
+
+        <div class="testimonio-section">
+
+            <div class="container">
+
+                <div class="dresscode-header text-center">
+
+                    <!-- <h3>
+                    {{ __('portal.gala.form.title') }}                    
+                    </h3> -->
+
+                    <!-- <span>
+                        {{ __('portal.gala.form.title') }}
+                        {{ __('portal.dresscode.men.highlight') }}
+                    </span> -->
+                    
+                    <p>
+                        {{ __('portal.gala.form.title') }}
+                    </p>
+
+                <a
+                    href="{{ route('encuesta') }}"
+                    target="_blank"
+                    class="dresscode-btn">
+                    {{ __('portal.gala.form.button') }}
+                </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 

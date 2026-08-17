@@ -6,29 +6,45 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-document.addEventListener('keydown', function (e) {
-    if (e.key === 'PrintScreen') {
-        navigator.clipboard.writeText('');
-        alert('Captura de pantalla deshabilitada.');
-    }
-    if (e.ctrlKey && (e.key === 'u' || e.key === 's')) {
-        e.preventDefault();
-        alert('Acción no permitida.');
-    }
-    if (e.key === 'F12') {
-        e.preventDefault();
-    }
-});
+/* ==============================================================
+ * NOTA IMPORTANTE sobre el bloqueo de PrintScreen / Ctrl+S / Ctrl+U / F12
+ * ==============================================================
+ * Estas técnicas NO impiden capturas de pantalla ni acceso al código:
+ * - No existe evento fiable para "PrintScreen" en todos los navegadores/SO.
+ * - Limpiar el portapapeles no evita una captura hecha por el sistema
+ *   operativo o por otra app (Snipping Tool, celular, etc.).
+ * - Ctrl+U/Ctrl+S/F12 se pueden evadir por menú del navegador o DevTools
+ *   remoto, y bloquearlos rompe funciones legítimas (guardar, ver código).
+ * Se deja el comportamiento porque probablemente es un requisito de
+ * negocio, pero se corrigen los errores técnicos (falta de manejo de
+ * errores y de validación de elementos nulos).
+ * ================================================================ */
+(function () {
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'PrintScreen') {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText('').catch(() => {
+                    // Sin permiso de portapapeles: no hacer nada, evitar error no capturado
+                });
+            }
+            alert('Captura de pantalla deshabilitada.');
+        }
+        if (e.ctrlKey && (e.key === 'u' || e.key === 's')) {
+            e.preventDefault();
+            alert('Acción no permitida.');
+        }
+        if (e.key === 'F12') {
+            e.preventDefault();
+        }
+    });
 
-// Overlay cuando pierde foco
-document.addEventListener('visibilitychange', function () {
-    const overlay = document.getElementById('anti-screenshot-overlay');
-    if (document.hidden) {
-        overlay.style.display = 'block';
-    } else {
-        overlay.style.display = 'none';
-    }
-});
+    // Overlay cuando pierde foco
+    document.addEventListener('visibilitychange', function () {
+        const overlay = document.getElementById('anti-screenshot-overlay');
+        if (!overlay) return; // evita romper el script si el overlay no existe en esta vista
+        overlay.style.display = document.hidden ? 'block' : 'none';
+    });
+})();
 
 $(function () {
 
@@ -82,9 +98,24 @@ $(".mobile-options").on('click', function () {
 // ============================================
 // TRADUCCION DE CHECK-IN & PROGRAMA DEL EVENTO
 // ============================================
-const portalTranslations = JSON.parse(
-    document.getElementById('portal-translations').textContent
-);
+
+/**
+ * Acceso seguro a propiedades anidadas.
+ * Evita que un dato faltante en las traducciones tumbe todo el script.
+ * Uso: t(portalTranslations, 'checkin.breakfast', 'Desayuno')
+ */
+function t(obj, path, fallback = '') {
+    try {
+        return path.split('.').reduce((acc, key) => (acc && acc[key] !== undefined ? acc[key] : undefined), obj) ?? fallback;
+    } catch {
+        return fallback;
+    }
+}
+
+const translationsEl = document.getElementById('portal-translations');
+const portalTranslations = translationsEl
+    ? JSON.parse(translationsEl.textContent || '{}')
+    : {};
 
 
 // ==============================
@@ -94,41 +125,41 @@ const portalTranslations = JSON.parse(
 const checkInProcess = {
     process: [
         {
-            title: portalTranslations.checkin.hosted_hilton_garden,
+            title: t(portalTranslations, 'checkin.hosted_hilton_garden'),
             steps: [
                 {
                     time: "7:00 - 7:40",
-                    activity: portalTranslations.checkin.breakfast,
+                    activity: t(portalTranslations, 'checkin.breakfast'),
                     location: "Hilton Garden Inn"
                 },
                 {
                     time: "7:50 - 8:00",
-                    activity: portalTranslations.checkin.board_transport,
+                    activity: t(portalTranslations, 'checkin.board_transport'),
                     location: "Hilton Garden Inn"
                 },
                 {
                     time: "8:00 - 8:30",
-                    activity: portalTranslations.checkin.transport,
+                    activity: t(portalTranslations, 'checkin.transport'),
                     location: "Hilton All-Inclusive"
                 },
                 {
                     time: "8:30 - 9:20",
-                    activity: portalTranslations.checkin.check_in,
+                    activity: t(portalTranslations, 'checkin.check_in'),
                     location: "Hilton All-Inclusive"
                 }
             ]
         },
         {
-            title: portalTranslations.checkin.direct_arrival,
+            title: t(portalTranslations, 'checkin.direct_arrival'),
             steps: [
                 {
                     time: "7:30 - 8:00",
-                    activity: portalTranslations.checkin.check_in,
+                    activity: t(portalTranslations, 'checkin.check_in'),
                     location: "Hilton All-Inclusive"
                 },
                 {
                     time: "8:00 - 9:00",
-                    activity: portalTranslations.checkin.breakfast,
+                    activity: t(portalTranslations, 'checkin.breakfast'),
                     location: "Hilton All-Inclusive"
                 }
             ]
@@ -140,7 +171,11 @@ function renderCheckInProcess() {
     const container = document.getElementById('schedule-list');
     if (!container) return;
 
-    const t = portalTranslations.checkin;
+    const t_ = {
+        schedule: t(portalTranslations, 'checkin.schedule'),
+        activity: t(portalTranslations, 'checkin.activity'),
+        location: t(portalTranslations, 'checkin.location')
+    };
 
     container.innerHTML = checkInProcess.process.map(process => `
         <div class="checkin-process">
@@ -148,22 +183,22 @@ function renderCheckInProcess() {
 
             <div class="checkin-table">
                 <div class="checkin-header">
-                    <div>${t.schedule}</div>
-                    <div>${t.activity}</div>
-                    <div>${t.location}</div>
+                    <div>${t_.schedule}</div>
+                    <div>${t_.activity}</div>
+                    <div>${t_.location}</div>
                 </div>
 
                 ${process.steps.map(step => `
                     <div class="checkin-row">
-                        <div class="checkin-time" data-label="${t.schedule}">
+                        <div class="checkin-time" data-label="${t_.schedule}">
                             ${step.time}
                         </div>
 
-                        <div class="checkin-activity" data-label="${t.activity}">
+                        <div class="checkin-activity" data-label="${t_.activity}">
                             ${step.activity}
                         </div>
 
-                        <div class="checkin-location" data-label="${t.location}">
+                        <div class="checkin-location" data-label="${t_.location}">
                             ${step.location}
                         </div>
                     </div>
@@ -178,197 +213,69 @@ function renderCheckInProcess() {
 // PROGRAMA DEL EVENTO
 // ==============================
 
+function buildDay(dayKey) {
+    return {
+        title: t(portalTranslations, `eventSchedule.${dayKey}.title`),
+        subtitle: t(portalTranslations, `eventSchedule.${dayKey}.subtitle`)
+    };
+}
+
 const eventSchedule = {
     day1: {
-        title: portalTranslations.eventSchedule.day1.title,
-        subtitle: portalTranslations.eventSchedule.day1.subtitle,
-
+        ...buildDay('day1'),
         activities: [
-            {
-                time: "09:00 – 10:00",
-                activity: portalTranslations.eventSchedule.day1.activities.registration,
-                location: portalTranslations.eventSchedule.day1.locations.blue_room
-            },
-            {
-                time: "10:00 – 11:00",
-                activity: portalTranslations.eventSchedule.day1.activities.presidency_message,
-                location: portalTranslations.eventSchedule.day1.locations.blue_room
-            },
-            {
-                time: "11:00 – 12:00",
-                activity: portalTranslations.eventSchedule.day1.activities.operational_overview,
-                location: portalTranslations.eventSchedule.day1.locations.blue_room
-            },
-            {
-                time: "12:00 – 13:00",
-                activity: portalTranslations.eventSchedule.day1.activities.administrative_overview,
-                location: portalTranslations.eventSchedule.day1.locations.blue_room
-            },
-            {
-                time: "13:00 – 15:00",
-                activity: portalTranslations.eventSchedule.day1.activities.buffet_lunch,
-                location: portalTranslations.eventSchedule.day1.locations.vela_restaurant
-            },
-            {
-                time: "15:00 – 17:00",
-                activity: portalTranslations.eventSchedule.day1.activities.support_center_panel,
-                location: portalTranslations.eventSchedule.day1.locations.blue_room
-            },
-            {
-                time: "17:00 – 18:00",
-                activity: portalTranslations.eventSchedule.day1.activities.break_to_build,
-                location: portalTranslations.eventSchedule.day1.locations.blue_room
-            },
-            {
-                time: "18:00 – 19:00",
-                activity: portalTranslations.eventSchedule.day1.activities.free_time,
-                location: portalTranslations.eventSchedule.day1.locations.none
-            },
-            {
-                time: "20:00",
-                activity: portalTranslations.eventSchedule.day1.activities.dinner_by_restaurant,
-                location: portalTranslations.eventSchedule.day1.locations.hotel_restaurants
-            }
+            { time: "09:00 – 10:00", activity: t(portalTranslations, 'eventSchedule.day1.activities.registration'), location: t(portalTranslations, 'eventSchedule.day1.locations.blue_room') },
+            { time: "10:00 – 11:00", activity: t(portalTranslations, 'eventSchedule.day1.activities.presidency_message'), location: t(portalTranslations, 'eventSchedule.day1.locations.blue_room') },
+            { time: "11:00 – 12:00", activity: t(portalTranslations, 'eventSchedule.day1.activities.operational_overview'), location: t(portalTranslations, 'eventSchedule.day1.locations.blue_room') },
+            { time: "12:00 – 13:00", activity: t(portalTranslations, 'eventSchedule.day1.activities.administrative_overview'), location: t(portalTranslations, 'eventSchedule.day1.locations.blue_room') },
+            { time: "13:00 – 15:00", activity: t(portalTranslations, 'eventSchedule.day1.activities.buffet_lunch'), location: t(portalTranslations, 'eventSchedule.day1.locations.vela_restaurant') },
+            { time: "15:00 – 17:00", activity: t(portalTranslations, 'eventSchedule.day1.activities.support_center_panel'), location: t(portalTranslations, 'eventSchedule.day1.locations.blue_room') },
+            { time: "17:00 – 18:00", activity: t(portalTranslations, 'eventSchedule.day1.activities.break_to_build'), location: t(portalTranslations, 'eventSchedule.day1.locations.blue_room') },
+            { time: "18:00 – 19:00", activity: t(portalTranslations, 'eventSchedule.day1.activities.free_time'), location: t(portalTranslations, 'eventSchedule.day1.locations.none') },
+            { time: "20:00", activity: t(portalTranslations, 'eventSchedule.day1.activities.dinner_by_restaurant'), location: t(portalTranslations, 'eventSchedule.day1.locations.hotel_restaurants') }
         ]
     },
 
     day2: {
-        title: portalTranslations.eventSchedule.day2.title,
-        subtitle: portalTranslations.eventSchedule.day2.subtitle,
-
+        ...buildDay('day2'),
         activities: [
-            {
-                time: "07:30 – 08:50",
-                activity: portalTranslations.eventSchedule.day2.activities.breakfast,
-                location: portalTranslations.eventSchedule.day2.locations.hotel_restaurant
-            },
-            {
-                time: "09:00 – 10:00",
-                activity: portalTranslations.eventSchedule.day2.activities.welcome_networking,
-                location: portalTranslations.eventSchedule.day2.locations.blue_room
-            },
-            {
-                time: "10:00 – 14:00",
-                activity: portalTranslations.eventSchedule.day2.activities.strategic_planning,
-                location: portalTranslations.eventSchedule.day2.locations.blue_room
-            },
-            {
-                time: "14:00 – 15:00",
-                activity: portalTranslations.eventSchedule.day2.activities.buffet_lunch,
-                location: portalTranslations.eventSchedule.day2.locations.vela_restaurant
-            },
-            {
-                time: "15:00 – 19:00",
-                activity: portalTranslations.eventSchedule.day2.activities.artificial_intelligence,
-                location: portalTranslations.eventSchedule.day2.locations.blue_room
-            },
-            {
-                time: "20:00",
-                activity: portalTranslations.eventSchedule.day2.activities.dinner_by_restaurant,
-                location: portalTranslations.eventSchedule.day2.locations.hotel_restaurants
-            }
+            { time: "07:30 – 08:50", activity: t(portalTranslations, 'eventSchedule.day2.activities.breakfast'), location: t(portalTranslations, 'eventSchedule.day2.locations.hotel_restaurant') },
+            { time: "09:00 – 10:00", activity: t(portalTranslations, 'eventSchedule.day2.activities.welcome_networking'), location: t(portalTranslations, 'eventSchedule.day2.locations.blue_room') },
+            { time: "10:00 – 14:00", activity: t(portalTranslations, 'eventSchedule.day2.activities.strategic_planning'), location: t(portalTranslations, 'eventSchedule.day2.locations.blue_room') },
+            { time: "14:00 – 15:00", activity: t(portalTranslations, 'eventSchedule.day2.activities.buffet_lunch'), location: t(portalTranslations, 'eventSchedule.day2.locations.vela_restaurant') },
+            { time: "15:00 – 19:00", activity: t(portalTranslations, 'eventSchedule.day2.activities.artificial_intelligence'), location: t(portalTranslations, 'eventSchedule.day2.locations.blue_room') },
+            { time: "20:00", activity: t(portalTranslations, 'eventSchedule.day2.activities.dinner_by_restaurant'), location: t(portalTranslations, 'eventSchedule.day2.locations.hotel_restaurants') }
         ]
     },
 
     day3: {
-        title: portalTranslations.eventSchedule.day3.title,
-        subtitle: portalTranslations.eventSchedule.day3.subtitle,
-
+        ...buildDay('day3'),
         activities: [
-            {
-                time: "07:30 – 08:50",
-                activity: portalTranslations.eventSchedule.day3.activities.breakfast,
-                location: portalTranslations.eventSchedule.day3.locations.hotel_restaurant
-            },
-            {
-                time: "09:00 – 10:00",
-                activity: portalTranslations.eventSchedule.day3.activities.welcome_networking,
-                location: portalTranslations.eventSchedule.day3.locations.blue_room
-            },
-            {
-                time: "10:00 – 14:00",
-                activity: portalTranslations.eventSchedule.day3.activities.effective_operating_budget,
-                location: portalTranslations.eventSchedule.day3.locations.blue_room
-            },
-            {
-                time: "14:00 – 15:00",
-                activity: portalTranslations.eventSchedule.day3.activities.buffet_lunch,
-                location: portalTranslations.eventSchedule.day3.locations.vela_restaurant
-            },
-            {
-                time: "15:00 – 16:00",
-                activity: portalTranslations.eventSchedule.day3.activities.suppliers_session,
-                location: portalTranslations.eventSchedule.day3.locations.blue_room
-            },
-            {
-                time: "16:00 – 18:00",
-                activity: portalTranslations.eventSchedule.day3.activities.best_practices,
-                location: portalTranslations.eventSchedule.day3.locations.blue_room
-            },
-            // {
-            //     time: "16:00 – 17:00",
-            //     activity: portalTranslations.eventSchedule.day3.activities.best_practices,
-            //     location: portalTranslations.eventSchedule.day3.locations.blue_room
-            // },
-            // {
-            //     time: "17:00 – 18:00",
-            //     activity: portalTranslations.eventSchedule.day3.activities.operational_best_practices,
-            //     location: portalTranslations.eventSchedule.day3.locations.blue_room
-            // },
-            {
-                time: "18:00 – 18:20",
-                activity: portalTranslations.eventSchedule.day3.activities.event_closing,
-                location: portalTranslations.eventSchedule.day3.locations.blue_room
-            },
-            {
-                time: "18:20 – 20:00",
-                activity: portalTranslations.eventSchedule.day3.activities.get_ready,
-                location: portalTranslations.eventSchedule.day3.locations.rooms
-            },
-            {
-                time: "20:00 – 00:00",
-                activity: portalTranslations.eventSchedule.day3.activities.gala_dinner,
-                location: portalTranslations.eventSchedule.day3.locations.dinner_room
-            }
+            { time: "07:30 – 08:50", activity: t(portalTranslations, 'eventSchedule.day3.activities.breakfast'), location: t(portalTranslations, 'eventSchedule.day3.locations.hotel_restaurant') },
+            { time: "09:00 – 10:00", activity: t(portalTranslations, 'eventSchedule.day3.activities.welcome_networking'), location: t(portalTranslations, 'eventSchedule.day3.locations.blue_room') },
+            { time: "10:00 – 14:00", activity: t(portalTranslations, 'eventSchedule.day3.activities.effective_operating_budget'), location: t(portalTranslations, 'eventSchedule.day3.locations.blue_room') },
+            { time: "14:00 – 15:00", activity: t(portalTranslations, 'eventSchedule.day3.activities.buffet_lunch'), location: t(portalTranslations, 'eventSchedule.day3.locations.vela_restaurant') },
+            { time: "15:00 – 16:00", activity: t(portalTranslations, 'eventSchedule.day3.activities.suppliers_session'), location: t(portalTranslations, 'eventSchedule.day3.locations.blue_room') },
+            { time: "16:00 – 18:00", activity: t(portalTranslations, 'eventSchedule.day3.activities.best_practices'), location: t(portalTranslations, 'eventSchedule.day3.locations.blue_room') },
+            { time: "18:00 – 18:20", activity: t(portalTranslations, 'eventSchedule.day3.activities.event_closing'), location: t(portalTranslations, 'eventSchedule.day3.locations.blue_room') },
+            { time: "18:20 – 20:00", activity: t(portalTranslations, 'eventSchedule.day3.activities.get_ready'), location: t(portalTranslations, 'eventSchedule.day3.locations.rooms') },
+            { time: "20:00 – 00:00", activity: t(portalTranslations, 'eventSchedule.day3.activities.gala_dinner'), location: t(portalTranslations, 'eventSchedule.day3.locations.dinner_room') }
         ]
     },
 
     day4: {
-        title: portalTranslations.eventSchedule.day4.title,
-        subtitle: portalTranslations.eventSchedule.day4.subtitle,
-
+        ...buildDay('day4'),
         activities: [
             {
-                // time: "Antes de tu salida",
-                time: portalTranslations.eventSchedule.day4.activities.before_departure,
-                activity: portalTranslations.eventSchedule.day4.activities.checkout_luggage,
-                location: portalTranslations.eventSchedule.day4.locations.lobby
+                time: t(portalTranslations, 'eventSchedule.day4.activities.before_departure'),
+                activity: t(portalTranslations, 'eventSchedule.day4.activities.checkout_luggage'),
+                location: t(portalTranslations, 'eventSchedule.day4.locations.lobby')
             },
-            {
-                time: "03:00",
-                activity: portalTranslations.eventSchedule.day4.activities.departure_airport.replace(':number', '1'),
-                location: portalTranslations.eventSchedule.day4.locations.lobby
-            },
-            {
-                time: "05:30",
-                activity: portalTranslations.eventSchedule.day4.activities.departure_airport.replace(':number', '2'),
-                location: portalTranslations.eventSchedule.day4.locations.lobby
-            },
-            {
-                time: "07:30",
-                activity: portalTranslations.eventSchedule.day4.activities.departure_airport.replace(':number', '3'),
-                location: portalTranslations.eventSchedule.day4.locations.lobby
-            },
-            {
-                time: "09:00",
-                activity: portalTranslations.eventSchedule.day4.activities.departure_airport.replace(':number', '4'),
-                location: portalTranslations.eventSchedule.day4.locations.lobby
-            },
-            {
-                time: "11:00",
-                activity: portalTranslations.eventSchedule.day4.activities.departure_airport.replace(':number', '5'),
-                location: portalTranslations.eventSchedule.day4.locations.lobby
-            }
+            ...['03:00', '05:30', '07:30', '09:00', '11:00'].map((time, i) => ({
+                time,
+                activity: t(portalTranslations, 'eventSchedule.day4.activities.departure_airport').replace(':number', String(i + 1)),
+                location: t(portalTranslations, 'eventSchedule.day4.locations.lobby')
+            }))
         ]
     }
 };
@@ -381,7 +288,11 @@ function renderEventSchedule(day) {
     const currentDay = eventSchedule[day];
     if (!currentDay) return;
 
-    const t = portalTranslations.eventSchedule;
+    const labels = {
+        schedule: t(portalTranslations, 'eventSchedule.schedule'),
+        activity: t(portalTranslations, 'eventSchedule.activity'),
+        location: t(portalTranslations, 'eventSchedule.location')
+    };
 
     container.innerHTML = `
         <div class="schedule-day">
@@ -392,22 +303,22 @@ function renderEventSchedule(day) {
 
             <div class="event-table">
                 <div class="event-header">
-                    <div>${t.schedule}</div>
-                    <div>${t.activity}</div>
-                    <div>${t.location}</div>
+                    <div>${labels.schedule}</div>
+                    <div>${labels.activity}</div>
+                    <div>${labels.location}</div>
                 </div>
 
                 ${currentDay.activities.map(item => `
                     <div class="event-row">
-                        <div class="event-time" data-label="${t.schedule}">
+                        <div class="event-time" data-label="${labels.schedule}">
                             ${item.time}
                         </div>
 
-                        <div class="event-activity" data-label="${t.activity}">
+                        <div class="event-activity" data-label="${labels.activity}">
                             ${item.activity}
                         </div>
 
-                        <div class="event-location" data-label="${t.location}">
+                        <div class="event-location" data-label="${labels.location}">
                             ${item.location}
                         </div>
                     </div>
@@ -433,6 +344,169 @@ function initEventScheduleNav() {
 }
 
 // ==============================
+// FORMULARIO DE MENU
+// ==============================
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwpjlw7_zFmJ1i-4qrRb8ifn-bksVlCpM-6V7yRjvBZ6uoFQIsjK8W2KZjvaCAiZHCjDA/exec";
+
+function initMenuForm() {
+    const form = document.getElementById('menuForm');
+    if (!form) return; // evita romper el script en páginas sin formulario
+
+    const submitBtn = document.getElementById('submitBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    const ticket = document.getElementById('ticket');
+    const nameInput = document.getElementById('fullName');
+
+    const submitText = submitBtn.dataset.defaultText;
+    const savingText = submitBtn.dataset.savingText;
+    const saveErrorText = errorMsg.dataset.saveError;
+
+    function checkValid() {
+        const name = nameInput.value.trim();
+        const entrada = form.querySelector('input[name="entrada"]:checked');
+        const plato = form.querySelector('input[name="platoFuerte"]:checked');
+        const postre = form.querySelector('input[name="postre"]:checked');
+        const valid = name.length > 2 && entrada && plato && postre;
+        submitBtn.disabled = !valid;
+        return valid;
+    }
+
+    form.addEventListener('input', () => {
+        errorMsg.style.display = 'none';
+        checkValid();
+    });
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!checkValid()) {
+            errorMsg.style.display = 'block';
+            return;
+        }
+        submitBtn.disabled = true;
+        submitBtn.textContent = savingText;
+
+        const name = nameInput.value.trim();
+        const entrada = form.querySelector('input[name="entrada"]:checked').value;
+        const plato = form.querySelector('input[name="platoFuerte"]:checked').value;
+        const postre = form.querySelector('input[name="postre"]:checked').value;
+        const allergyEl = document.getElementById('allergyNote');
+        const allergy = allergyEl ? allergyEl.value.trim() : '';
+
+        const record = {
+            name,
+            entrada,
+            plato,
+            postre,
+            allergy,
+            timestamp: new Date().toISOString()
+        };
+
+        try {
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(record)
+            });
+
+            // fetch no lanza error por códigos 4xx/5xx: hay que revisarlo a mano
+            if (!response.ok) {
+                throw new Error(`Respuesta no válida del servidor: ${response.status}`);
+            }
+        } catch (err) {
+            console.error('Error guardando la selección', err);
+            errorMsg.textContent = saveErrorText;
+            errorMsg.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.textContent = submitText;
+            return;
+        }
+
+        document.getElementById('t-name').textContent = name;
+        document.getElementById('t-entrada').textContent = entrada;
+        document.getElementById('t-plato').textContent = plato;
+        document.getElementById('t-postre').textContent = postre;
+
+        const allergyRow = document.getElementById('t-allergy-row');
+        if (allergy) {
+            document.getElementById('t-allergy').textContent = allergy;
+            allergyRow.style.display = 'flex';
+        } else {
+            allergyRow.style.display = 'none';
+        }
+
+        form.style.display = 'none';
+        ticket.classList.add('show');
+        submitBtn.textContent = submitText;
+    });
+
+    const editLink = document.getElementById('editLink');
+    if (editLink) {
+        editLink.addEventListener('click', () => {
+            ticket.classList.remove('show');
+            form.style.display = 'block';
+            checkValid();
+        });
+    }
+
+    checkValid();
+}
+
+// ==============================
+// CONTADOR
+// ==============================
+
+function initGalaCountdown() {
+    const countdown = document.getElementById('galaCountdown');
+    if (!countdown) return;
+
+    const targetDate = new Date(countdown.dataset.target).getTime();
+
+    const daysElement = document.getElementById('countdown-days');
+    const hoursElement = document.getElementById('countdown-hours');
+    const minutesElement = document.getElementById('countdown-minutes');
+    const secondsElement = document.getElementById('countdown-seconds');
+
+    function pad(value) {
+        return String(value).padStart(2, '0');
+    }
+
+    let intervalId = null;
+
+    function updateCountdown() {
+        const now = Date.now();
+        const difference = targetDate - now;
+
+        if (difference <= 0) {
+            daysElement.textContent = '00';
+            hoursElement.textContent = '00';
+            minutesElement.textContent = '00';
+            secondsElement.textContent = '00';
+
+            // Detener el intervalo: ya no tiene sentido seguir calculando cada segundo
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+            }
+            return;
+        }
+
+        const totalSeconds = Math.floor(difference / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        daysElement.textContent = pad(days);
+        hoursElement.textContent = pad(hours);
+        minutesElement.textContent = pad(minutes);
+        secondsElement.textContent = pad(seconds);
+    }
+
+    updateCountdown();
+    intervalId = setInterval(updateCountdown, 1000);
+}
+
+// ==============================
 // INIT
 // ==============================
 document.addEventListener('DOMContentLoaded', () => {
@@ -442,224 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderEventSchedule('day1');
         initEventScheduleNav();
     }
+
+    initMenuForm();
+    initGalaCountdown();
 });
-
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwpjlw7_zFmJ1i-4qrRb8ifn-bksVlCpM-6V7yRjvBZ6uoFQIsjK8W2KZjvaCAiZHCjDA/exec";
-
-const form = document.getElementById('menuForm');
-const submitBtn = document.getElementById('submitBtn');
-const errorMsg = document.getElementById('errorMsg');
-const ticket = document.getElementById('ticket');
-const nameInput = document.getElementById('fullName');
-
-
-/**
- * Textos provenientes de Laravel / portal.php
- */
-const submitText = submitBtn.dataset.defaultText;
-const savingText = submitBtn.dataset.savingText;
-const saveErrorText = errorMsg.dataset.saveError;
-
-
-/**
- * Valida el formulario
- */
-function checkValid() {
-
-    const name = nameInput.value.trim();
-
-    const entrada = form.querySelector(
-        'input[name="entrada"]:checked'
-    );
-
-    const plato = form.querySelector(
-        'input[name="platoFuerte"]:checked'
-    );
-
-    const postre = form.querySelector(
-        'input[name="postre"]:checked'
-    );
-
-    const valid =
-        name.length > 2 &&
-        entrada &&
-        plato &&
-        postre;
-
-    submitBtn.disabled = !valid;
-
-    return valid;
-}
-
-
-/**
- * Oculta el mensaje de error
- * y vuelve a validar
- */
-form.addEventListener('input', () => {
-
-    errorMsg.style.display = 'none';
-
-    checkValid();
-
-});
-
-
-/**
- * Envío del formulario
- */
-form.addEventListener('submit', async (e) => {
-
-    e.preventDefault();
-
-    if (!checkValid()) {
-
-        errorMsg.style.display = 'block';
-
-        return;
-    }
-
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = savingText;
-
-
-    const name = nameInput.value.trim();
-
-    const entrada = form.querySelector(
-        'input[name="entrada"]:checked'
-    ).value;
-
-    const plato = form.querySelector(
-        'input[name="platoFuerte"]:checked'
-    ).value;
-
-    const postre = form.querySelector(
-        'input[name="postre"]:checked'
-    ).value;
-
-    const allergy = document
-        .getElementById('allergyNote')
-        .value
-        .trim();
-
-
-    /**
-     * Registro que será enviado
-     * directamente a Google Apps Script.
-     */
-    const record = {
-
-        name: name,
-
-        entrada: entrada,
-
-        plato: plato,
-
-        postre: postre,
-
-        allergy: allergy,
-
-        timestamp: new Date().toISOString()
-
-    };
-
-
-    try {
-
-        await fetch(SCRIPT_URL, {
-
-            method: 'POST',
-
-            headers: {
-                'Content-Type': 'text/plain;charset=utf-8'
-            },
-
-            body: JSON.stringify(record)
-
-        });
-
-    } catch (err) {
-
-        console.error(
-            'Error guardando la selección',
-            err
-        );
-
-        errorMsg.textContent = saveErrorText;
-
-        errorMsg.style.display = 'block';
-
-        submitBtn.disabled = false;
-
-        submitBtn.textContent = submitText;
-
-        return;
-    }
-
-
-    /**
-     * Mostrar confirmación
-     */
-    document.getElementById('t-name').textContent = name;
-
-    document.getElementById('t-entrada').textContent = entrada;
-
-    document.getElementById('t-plato').textContent = plato;
-
-    document.getElementById('t-postre').textContent = postre;
-
-
-    /**
-     * Alergia
-     */
-    if (allergy) {
-
-        document.getElementById('t-allergy').textContent = allergy;
-
-        document.getElementById(
-            't-allergy-row'
-        ).style.display = 'flex';
-
-    } else {
-
-        document.getElementById(
-            't-allergy-row'
-        ).style.display = 'none';
-
-    }
-
-
-    /**
-     * Ocultar formulario
-     * y mostrar ticket.
-     */
-    form.style.display = 'none';
-
-    ticket.classList.add('show');
-
-    submitBtn.textContent = submitText;
-
-});
-
-
-/**
- * Editar selección
- */
-document
-    .getElementById('editLink')
-    .addEventListener('click', () => {
-
-        ticket.classList.remove('show');
-
-        form.style.display = 'block';
-
-        checkValid();
-
-    });
-
-
-/**
- * Validación inicial
- */
-checkValid();

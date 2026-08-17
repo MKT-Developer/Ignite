@@ -358,6 +358,19 @@ return [
             'save_error' => 'No pudimos guardar tu selección. Intenta de nuevo.',
 
             'hint' => 'Tu selección quedará registrada para el equipo organizador.',
+
+            'title' => 'Antes de la noche, cuéntanos qué elegirás de nuestro menú preparado especialmente para la ocasión',
+
+            'button' => 'Déjanos saber tu opción aquí',
+        ],
+
+        'countdown' => [
+            'label' => 'Cuenta regresiva',
+            'days' => 'Días',
+            'hours' => 'Horas',
+            'minutes' => 'Minutos',
+            'seconds' => 'Segundos',
+            'note' => 'El evento comienza en:',
         ],
 
     ],

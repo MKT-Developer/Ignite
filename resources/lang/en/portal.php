@@ -123,6 +123,8 @@ return [
         ],
 
         'view_examples' => 'View examples',
+
+
     ],
 
     'checkin' => [
@@ -359,7 +361,19 @@ return [
             'save_error' => 'We could not save your selection. Please try again.',
 
             'hint' => 'Your selection will be recorded for the organizing team.',
+
+            'title' => 'Antes de la noche, cuéntanos qué elegirás de nuestro menú preparado especialmente para la ocasión',
+
+            'button' => 'Déjanos saber tu opción aquí',
         ],
 
+        'countdown' => [
+            'label' => 'Countdown',
+            'days' => 'Days',
+            'hours' => 'Hours',
+            'minutes' => 'Minutes',
+            'seconds' => 'Seconds',
+            'note' => 'The event begins in:',
+        ],
     ],
 ];
