@@ -1095,14 +1095,14 @@
                 </div>
 
 
-                <button
+                <!-- <button
                     type="button"
                     class="edit-link"
                     id="editLink">
 
                     {{ __('portal.gala.confirmation.edit') }}
 
-                </button>
+                </button> -->
 
             </div>
 

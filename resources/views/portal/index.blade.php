@@ -497,7 +497,7 @@
 
 </section> -->
 
-<section clas="dress_code">
+<section class="dress_code">
 
     <img src="../images/portal/dress_code.png" alt="">
 
