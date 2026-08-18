@@ -271,9 +271,17 @@ return [
 
             'submit' => 'Confirm my selection',
 
+            'saving' => 'Saving...',
+
             'error' => 'Please complete your name and select one option from each course before continuing.',
 
+            'save_error' => 'We couldn’t save your selection. Please try again.',
+
             'hint' => 'Your selection will be recorded for the organizing team.',
+
+            'title' => 'Before the evening, let us know what you’ll be choosing from our specially prepared menu for the occasion',
+
+            'button' => 'Let us know your choice here',
         ],
 
         'menu' => [
@@ -339,33 +347,6 @@ return [
 
         'admin_link' => 'Organizing team panel',
 
-        'form' => [
-
-            'full_name' => [
-                'label' => 'Full name',
-                'placeholder' => 'As it will appear at your place at the table',
-            ],
-
-            'allergy' => [
-                'label' => 'Allergy that may represent a health risk (optional)',
-                'placeholder' => 'E.g. shellfish, nuts, severe gluten allergy...',
-                'note' => 'This field is for allergies that could put your health at risk.',
-            ],
-
-            'submit' => 'Confirm my selection',
-
-            'saving' => 'Saving...',
-
-            'error' => 'Please complete your name and select one option from each course before continuing.',
-
-            'save_error' => 'We could not save your selection. Please try again.',
-
-            'hint' => 'Your selection will be recorded for the organizing team.',
-
-            'title' => 'Antes de la noche, cuéntanos qué elegirás de nuestro menú preparado especialmente para la ocasión',
-
-            'button' => 'Déjanos saber tu opción aquí',
-        ],
 
         'countdown' => [
             'label' => 'Countdown',
@@ -374,6 +355,49 @@ return [
             'minutes' => 'Minutes',
             'seconds' => 'Seconds',
             'note' => 'The event begins in:',
+        ],
+
+
+    ],
+
+    'speakers' => [
+        'title' => 'Speakers',
+        'description' => 'Meet the experts who will join us to share ideas, experiences, and tools that are transforming the way we work.',
+
+        1 => [
+            'image_alt' => 'Rodrigo del Val Martín',
+            'name' => 'RODRIGO DEL VAL MARTÍN',
+            'workshop' => 'CONFERENCE "BREAK TO BUILD" · WORKSHOP: STRATEGIC PLANNING',
+
+            'description_1' => 'Consultant, executive coach, and speaker with a practical approach. He served as a lead consultant for FranklinCovey Mexico for 13 years and as Rector of Universidad Anáhuac Oaxaca for another 13, where he led teams and complex processes with measurable results. Author of two books on leadership —used as core material in the MBA program at Tec de Monterrey— and creator of the Deep Leadership® model.',
+
+            'description_2' => 'He has delivered more than 350 conferences in Las Vegas, Los Angeles, Peru, Panama, Guatemala, Nicaragua, and Mexico, speaking to audiences of up to 10,000 people, and has supported more than 100 leaders through executive coaching processes.',
+
+            'description_3' => 'Join us for a session to look ahead together and give a name to what is coming.',
+        ],
+
+        2 => [
+            'image_alt' => 'Jesús Vargas',
+            'name' => 'JESÚS VARGAS',
+            'workshop' => 'WORKSHOP: ARTIFICIAL INTELLIGENCE',
+
+            'description_1' => 'Founder and CEO of Phos AI Labs, a consulting and training firm in artificial intelligence for companies looking to operate in an AI-native way. His approach is not about selling tools; it is about building the foundation on which technology can truly work.',
+
+            'description_2' => 'His team has completed more than 450 projects across manufacturing, aviation, distribution, professional services, healthcare, and creative industries, including work for Zapier, Coca-Cola, Medtronic, and American Express. He recently worked in Cancún with hospitality industry leaders on these same topics.',
+
+            'description_3' => 'Join us to take a closer look at a tool that is already changing the way we work.',
+        ],
+
+        3 => [
+            'image_alt' => 'Fernando Rodríguez Figueroa',
+            'name' => 'FERNANDO RODRÍGUEZ FIGUEROA',
+            'workshop' => 'WORKSHOP: EFFECTIVE OPERATING BUDGET',
+
+            'description_1' => 'Professor at Escuela Bancaria y Comercial (EBC) and International Professor at IMB | International Management & Business Institute, where he provides executive training in Mexico, Guatemala, Colombia, Ecuador, Peru, Chile, and Argentina.',
+
+            'description_2' => 'His career combines academia and operations: he served as Graduate Academic Advisor at EBC, taught university courses such as Operating Cost Strategies, Planning and Control Techniques, and Decision Models, and has held management positions at AT&T and in multi-unit operations management, where he managed budgets, reserve funds, and monthly reports for committees. He specializes in KPIs, business intelligence, and data-driven decision-making.',
+
+            'description_3' => 'Join us for a workshop to explore how a budget can work in our favor.',
         ],
     ],
 ];

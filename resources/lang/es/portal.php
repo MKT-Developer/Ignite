@@ -372,6 +372,46 @@ return [
             'seconds' => 'Segundos',
             'note' => 'El evento comienza en:',
         ],
+    ],
 
+    'speakers' => [
+        'title' => 'Ponentes',
+        'description' => 'Conoce a quienes nos acompañarán para compartir ideas, experiencias y herramientas que están transformando la manera de trabajar.',
+
+        1 => [
+            'image_alt' => 'Rodrigo del Val Martín',
+            'name' => 'RODRIGO DEL VAL MARTÍN',
+            'workshop' => 'CONFERENCIA "BREAK TO BUILD" · TALLER: PLANEACIÓN ESTRATÉGICA',
+
+            'description_1' => 'Consultor, coach ejecutivo y conferencista con enfoque práctico. Fue consultor líder de FranklinCovey en México durante 13 años y Rector de la Universidad Anáhuac Oaxaca por otros 13, donde dirigió equipos y procesos complejos con resultados medibles. Autor de dos libros sobre liderazgo —material base en el MBA del Tec de Monterrey— y creador del modelo Deep Leadership®.',
+
+            'description_2' => 'Ha impartido más de 350 conferencias en Las Vegas, Los Ángeles, Perú, Panamá, Guatemala, Nicaragua y México, ante foros de hasta 10,000 personas, y ha acompañado a más de 100 líderes en procesos de coaching ejecutivo.',
+
+            'description_3' => 'Te esperamos en una sesión para mirar el futuro juntos y ponerle nombre a lo que viene.',
+        ],
+
+        2 => [
+            'image_alt' => 'Jesús Vargas',
+            'name' => 'JESÚS VARGAS',
+            'workshop' => 'TALLER: INTELIGENCIA ARTIFICIAL',
+
+            'description_1' => 'Fundador y CEO de Phos AI Labs, firma de consultoría y capacitación en inteligencia artificial para empresas que buscan operar de forma AI-native. Su enfoque no es vender herramientas: es construir primero la base sobre la que la tecnología realmente funciona.',
+
+            'description_2' => 'Su equipo suma más de 450 proyectos en manufactura, aviación, distribución, servicios profesionales, salud e industrias creativas, incluyendo trabajo para Zapier, Coca-Cola, Medtronic y American Express. Recientemente trabajó en Cancún con líderes del sector hospitalidad sobre estos mismos temas.',
+
+            'description_3' => 'Acompáñanos a conocer de cerca una herramienta que ya está cambiando la forma de trabajar.',
+        ],
+
+        3 => [
+            'image_alt' => 'Fernando Rodríguez Figueroa',
+            'name' => 'FERNANDO RODRÍGUEZ FIGUEROA',
+            'workshop' => 'TALLER: PRESUPUESTO OPERATIVO EFECTIVO',
+
+            'description_1' => 'Catedrático de la Escuela Bancaria y Comercial (EBC) y Catedrático Internacional del IMB | International Management & Business Institute, donde imparte formación ejecutiva en México, Guatemala, Colombia, Ecuador, Perú, Chile y Argentina.',
+
+            'description_2' => 'Su trayectoria combina aula y operación: fue Consejero Académico de Posgrado en EBC, docente universitario en materias como Estrategias de Costos de Operación, Técnicas de Planeación y Control y Modelos de Decisión, y ha ocupado posiciones de gestión en AT&T y en administración de operaciones multiunidad, donde manejó presupuestos, fondos de reserva y reportes mensuales a comités. Especialista en KPIs, inteligencia de negocios y toma de decisiones basada en datos.',
+
+            'description_3' => 'Nos vemos en un taller para conversar sobre cómo el presupuesto puede trabajar a nuestro favor.',
+        ],
     ],
 ];

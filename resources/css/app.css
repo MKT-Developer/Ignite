@@ -287,8 +287,8 @@ h6 {
     background: #fff;
 }
 
-a:focus,
-a:hover {
+/* a:hover */
+a:focus {
     color: #93C01F;
 }
 
@@ -1762,9 +1762,14 @@ body.portal-user .pcoded-main-container {
     color: white;
 }
 
-.portal-btn-program:hover,
 .portal-btn-outline:hover {
-    opacity: .85;
+    color: rgb(255 255 255 / 90%);
+    color: inherit;
+}
+
+.portal-btn-program:hover {
+    background: rgb(147 192 31 / 90%);
+    color: inherit;
 }
 
 @media(max-width:576px) {
@@ -3063,6 +3068,144 @@ ACCESIBILIDAD
 
 /* CONTADOR */
 
-.testimonio-section{
+.testimonio-section {
     padding: 40px 20px;
+}
+
+
+/* =========================================================
+   speaker
+========================================================== */
+
+.speaker-section {
+    text-align: center;
+    margin: 40px auto;
+    padding: 22px 20px 40px;
+    max-width: 1200px;
+}
+
+.speaker-label {
+    color: #245C3A;
+    font-size: 42px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.speaker-note {
+    color: #245C3A;
+    font-size: 22px;
+    line-height: 1.5;
+    margin: 0 auto 35px;
+    max-width: 850px;
+}
+
+
+/* CONTENIDO */
+
+.speaker-content {
+    width: 100%;
+    max-width: 950px;
+    margin: 70px auto 0;
+}
+
+
+/* IMAGEN */
+
+.speaker-image {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 30px;
+}
+
+.speaker-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 10px solid #55882B;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+
+/* NOMBRE */
+
+.speaker-name {
+    color: #245C3A;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    text-align: center;
+}
+
+
+/* TALLER */
+
+.speaker-workshop {
+    color: #245C3A;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 30px;
+    text-align: center;
+}
+
+
+/* DESCRIPCIÓN */
+
+.speaker-description-wrapper {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.speaker-description {
+    color: #245C3A;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 20px;
+    text-align: justify;
+}
+
+.speaker-description:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 768px) {
+
+    .speaker-section {
+        margin: 30px auto;
+        padding: 20px 15px 30px;
+    }
+
+    .speaker-label {
+        font-size: 32px;
+    }
+
+    .speaker-note {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+
+    .speaker-image {
+        margin-bottom: 25px;
+    }
+
+    .speaker-name {
+        font-size: 26px;
+    }
+
+    .speaker-workshop {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+
+    .speaker-description {
+        font-size: 15px;
+        line-height: 1.55;
+    }
 }

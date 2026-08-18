@@ -459,6 +459,63 @@
 </section>
 <!-- PROGRAMA DEL EVENTO -->
 
+{{-- =========================================================
+     speaker
+========================================================== --}}
+<section class="speaker-section">
+
+    <div class="speaker-label">
+        {{ __('portal.speakers.title') }}
+    </div>
+
+    <p class="speaker-note">
+        {{ __('portal.speakers.description') }}
+    </p>
+
+    @foreach (__('portal.speakers') as $key => $speaker)
+
+    @if (is_numeric($key))
+
+    <div class="speaker-content">
+
+        <div class="speaker-image">
+            <img
+                src="../images/portal/ponente-{{ $key }}.png"
+                alt="{{ $speaker['image_alt'] }}">
+        </div>
+
+        <h2 class="speaker-name">
+            {{ $speaker['name'] }}
+        </h2>
+
+        <h3 class="speaker-workshop">
+            {{ $speaker['workshop'] }}
+        </h3>
+
+        <div class="speaker-description-wrapper">
+
+            <p class="speaker-description">
+                {{ $speaker['description_1'] }}
+            </p>
+
+            <p class="speaker-description">
+                {{ $speaker['description_2'] }}
+            </p>
+
+            <p class="speaker-description">
+                {{ $speaker['description_3'] }}
+            </p>
+
+        </div>
+
+    </div>
+
+    @endif
+
+    @endforeach
+
+</section>
+
 {{-- CÓDIGO DE VESTIMENTA --}}
 <section class="dresscode-header-bg">
 
@@ -519,7 +576,7 @@
                     src="{{ asset('../images/portal/referencia-mujer.webp') }}"
                     alt="{{ __('portal.dresscode.ladies.image_alt') }}"> -->
 
-                    <img
+                <img
                     src="{{ asset('../images/portal/Referencia mujer_.png') }}"
                     alt="{{ __('portal.dresscode.ladies.image_alt') }}">
             </div>
@@ -532,7 +589,7 @@
                     src="{{ asset('../images/portal/referencia-hombre.webp') }}"
                     alt="{{ __('portal.dresscode.men.image_alt') }}"> -->
 
-                    <img
+                <img
                     src="{{ asset('../images/portal/Referencia hombre_.png') }}"
                     alt="{{ __('portal.dresscode.ladies.image_alt') }}">
             </div>
@@ -591,10 +648,14 @@
 
 </section> -->
 
+<script>
+    const language = "{{ app()->getLocale() }}";
+</script>
+
 <section class="dress_code">
-
-    <img src="../images/portal/dress_code.png" alt="">    
-
+    <img
+        src="{{ app()->getLocale() === 'en' ? '../images/portal/dress_code_en.png' : '../images/portal/dress_code.png' }}"
+        alt="">
 </section>
 
 <section class="testimonio-header-bg">
@@ -615,17 +676,17 @@
                         {{ __('portal.gala.form.title') }}
                         {{ __('portal.dresscode.men.highlight') }}
                     </span> -->
-                    
+
                     <p>
                         {{ __('portal.gala.form.title') }}
                     </p>
 
-                <a
-                    href="{{ route('encuesta') }}"
-                    target="_blank"
-                    class="dresscode-btn">
-                    {{ __('portal.gala.form.button') }}
-                </a>
+                    <a
+                        href="{{ route('encuesta') }}"
+                        target="_blank"
+                        class="dresscode-btn">
+                        {{ __('portal.gala.form.button') }}
+                    </a>
 
                 </div>
 
